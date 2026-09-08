@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>AI for Medical Communication Leaders | Workshop Lab</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+
+:root{
+  --navy:#0b2d5f;--navy2:#163f73;--teal:#078b9e;--teal2:#0aa58f;
+  --gold:#f4c95d;--red:#c8102e;--green:#168a68;--amber:#e5a623;
+  --ink:#253044;--muted:#667085;--off:#f6f9fc;--pearl:#e5edf5;--white:#fff;
+  --soft-blue:#eef8ff;--soft-green:#effaf6;--soft-gold:#fff9e9;--soft-red:#fff3f4;
+  --shadow:0 10px 28px rgba(11,45,95,.08)
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:"Sarabun",Tahoma,Arial,sans-serif;color:var(--ink);background:var(--off);line-height:1.65}
+.hero{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;padding:30px 24px 42px;position:relative;overflow:hidden}
+.hero:before{content:"Rx";position:absolute;right:3%;top:-24px;font-weight:800;font-size:210px;line-height:1;color:rgba(255,255,255,.05)}
+.hero:after{content:"AI";position:absolute;right:16%;bottom:-62px;font-weight:800;font-size:190px;line-height:1;color:rgba(244,201,93,.09)}
+.hero-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1fr 250px;gap:24px;align-items:center;position:relative;z-index:2}
+.brand-row{display:flex;align-items:center;gap:15px;margin-bottom:20px}.mark{width:82px;height:82px;border-radius:18px;background:#fff;color:var(--navy);display:grid;place-items:center;font-size:38px;font-weight:800;border:2px solid var(--gold);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.brand-text strong{display:block;font-size:18px}.brand-text small{color:#d8f7f6;font-weight:600}
+.badge{display:inline-block;background:var(--gold);color:var(--navy);padding:6px 11px;border-radius:999px;font-size:12px;font-weight:800;margin-bottom:10px}
+.hero h1{font-size:clamp(36px,5.2vw,66px);line-height:1.06;margin:0 0 12px;font-weight:800}.hero h1 span{color:#ffe18a}
+.hero .sub{font-size:20px;max-width:820px;margin:0 0 18px;color:#f2ffff}.hero .chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:7px 12px;background:rgba(255,255,255,.1);font-size:13px}
+.hero-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:22px;padding:22px;text-align:center;backdrop-filter:blur(4px)}.hero-card .icon{font-size:70px}.hero-card b{display:block;font-size:19px;margin-top:8px}.hero-card small{display:block;color:#daf8f4;margin-top:5px}
+.topnav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:3px solid var(--gold);box-shadow:0 3px 14px rgba(0,0,0,.07)}.topnav-inner{max-width:1180px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 18px;overflow:auto}.topnav a{color:var(--navy);text-decoration:none;font-weight:700;white-space:nowrap}.topnav a:hover{color:var(--teal)}
+.container{max-width:1180px;margin:auto;padding:32px 20px 70px}.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}.intro-card,.safety-card,.howto-card{background:#fff;border-radius:18px;padding:22px;box-shadow:var(--shadow);border:1px solid #e8eef5}.intro-card{border-left:7px solid var(--teal)}.safety-card{border-left:7px solid var(--green)}
+.section-title{font-size:31px;color:var(--navy);margin:42px 0 8px;line-height:1.25}.section-lead{color:var(--muted);margin-top:0}.rule{height:4px;background:linear-gradient(90deg,var(--teal),var(--gold),var(--red));border-radius:4px;margin-bottom:22px}
+.rtf{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.rtf-box{background:var(--off);border:1px solid var(--pearl);border-radius:14px;padding:16px}.rtf-box b{display:block;color:var(--teal);font-size:23px}.addon-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.addon{border-radius:14px;padding:14px;border:1px solid var(--pearl)}.addon.context{background:var(--soft-gold)}.addon.guard{background:var(--soft-green)}
+.traffic{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.light{border-radius:14px;padding:13px;border:1px solid #e6e6e6}.light.red{background:var(--soft-red)}.light.amber{background:var(--soft-gold)}.light.green{background:var(--soft-green)}.dot{display:inline-block;width:13px;height:13px;border-radius:50%;margin-right:7px}.red .dot{background:#d92d20}.amber .dot{background:#f79009}.green .dot{background:#12b76a}
+.workshop-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}.flow-step{background:#fff;border:1px solid var(--pearl);border-radius:12px;padding:12px;text-align:center;font-size:13px}.flow-step b{display:block;color:var(--navy);font-size:15px}
+.group-label{display:flex;align-items:center;gap:10px;margin-top:34px}.group-label .pill{font-size:12px;font-weight:800;color:#fff;background:var(--teal);padding:6px 10px;border-radius:999px}.group-label h2{margin:0;color:var(--navy);font-size:25px}
+.case-card{background:#fff;border:1px solid #e6edf4;border-radius:20px;margin:22px 0;overflow:hidden;box-shadow:var(--shadow)}.case-head{display:flex;align-items:center;gap:14px;padding:18px 20px;background:linear-gradient(90deg,#fff,#f5fbff);border-bottom:1px solid #e9eef4}.case-num{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;font-weight:800;font-size:18px;flex:none}.case-title-wrap h3{margin:2px 0 0;color:var(--navy);font-size:23px;line-height:1.3}.case-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--teal2);font-weight:800}.case-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.mini{display:inline-block;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:700;background:#eaf0f8;color:var(--navy)}.mini.framework{background:#e6f7f4;color:#076c5b}.mini.level{background:#fff3d2;color:#805500}.mini.data{background:#f1ecff;color:#6941c6}
+.two-col{display:grid;grid-template-columns:1fr 1fr}.panel{padding:18px 20px;min-width:0}.context-panel{background:#fffaf0;border-right:1px solid #eee}.prompt-panel{background:#f7f9ff}.panel-title{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:800;color:var(--navy);margin-bottom:9px}
+.editor{width:100%;min-height:260px;resize:vertical;border:1px solid rgba(29,45,95,.14);border-radius:12px;padding:15px;background:rgba(255,255,255,.9);font-family:"Sarabun",Tahoma,Arial,sans-serif;font-size:14px;line-height:1.62;color:var(--ink);outline:none}.editor:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(7,139,158,.1)}
+.copy-btn,.combo-btn,.download-btn,.reset-btn{font-family:inherit;border:0;color:#fff;padding:7px 10px;border-radius:8px;cursor:pointer;font-weight:700}.copy-btn{background:var(--navy)}.combo-btn{background:var(--green)}.download-btn{background:var(--teal)}.reset-btn{background:#667085}.copy-btn:hover,.combo-btn:hover,.download-btn:hover,.reset-btn:hover{filter:brightness(.92)}.case-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.challenge{padding:14px 20px 18px;border-top:1px dashed #ddd;background:#fff}.challenge strong{color:var(--red)}.followup{padding:15px 20px;background:var(--soft-blue);border-top:1px dashed #bdd7e5}.followup strong{color:var(--navy)}.followup pre,.quicklib code{white-space:pre-wrap;word-break:break-word;margin:9px 0 0;background:#fff;border:1px solid #dfe8f2;border-radius:11px;padding:13px;font-family:"Sarabun",Tahoma,Arial,sans-serif;font-size:14px;line-height:1.6}.discuss{padding:15px 20px;background:var(--soft-green);border-top:1px solid #d8ece2}.discuss strong{color:var(--green)}.discuss ul{margin:8px 0 0 20px;padding:0}
+.quicklib{background:#fff;border:1px solid #e6e6e6;border-radius:18px;padding:22px;margin-top:32px;box-shadow:var(--shadow)}.quicklib code{display:block;background:#f7f9ff;margin:9px 0}.quicklib h2{margin-top:0;color:var(--navy)}
+.footer{background:var(--navy);color:#fff;border-top:5px solid var(--gold)}.footer-inner{max-width:1180px;margin:auto;padding:22px 20px;display:flex;justify-content:space-between;gap:20px;align-items:center}.footer small{color:#dbe7f4}
+.note{font-size:13px;color:var(--muted)}.callout{border-radius:14px;padding:14px;background:#fff;border:1px dashed #cbd5e1;margin-top:14px}.callout b{color:var(--navy)}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.hero-card{max-width:320px}.intro-grid,.two-col{grid-template-columns:1fr}.context-panel{border-right:0;border-bottom:1px solid #eee}.rtf{grid-template-columns:1fr}.addon-grid{grid-template-columns:1fr}.traffic{grid-template-columns:1fr}.workshop-flow{grid-template-columns:1fr 1fr}.footer-inner{flex-direction:column;align-items:flex-start}}
+@media(max-width:560px){.workshop-flow{grid-template-columns:1fr}.case-title-wrap h3{font-size:20px}.section-title{font-size:27px}.panel{padding:15px}.editor{min-height:300px}}
+
+/* --- Evidence + Identity Lab v2 --- */
+.disclosure{background:linear-gradient(135deg,#fff7e8,#fff);border:1px solid #f6d48d;border-left:7px solid var(--amber);border-radius:18px;padding:20px;margin:18px 0;box-shadow:var(--shadow)}
+.disclosure strong{color:#8a5b00}.evidence-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin:18px 0}.evidence-card{background:#fff;border:1px solid #e6edf4;border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.evidence-card h3{margin:0 0 8px;color:var(--navy)}.source-pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef4ff;color:#344e8a;font-weight:800;font-size:11px;margin:0 6px 6px 0}.source-pill.sponsor{background:#fff3d2;color:#805500}.source-pill.rct{background:#e5f6f1;color:#076c5b}.source-pill.invitro{background:#f1ecff;color:#6941c6}
+.evidence-list{margin:10px 0 0 20px;padding:0}.evidence-list li{margin:5px 0}.claim-ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.claim-step{border:1px solid var(--pearl);border-radius:14px;padding:13px;background:#fff}.claim-step b{display:block;color:var(--navy);font-size:15px}.claim-step.ok{background:var(--soft-green)}.claim-step.caution{background:var(--soft-gold)}.claim-step.stop{background:var(--soft-red)}
+.identity-lab{background:#fff;border:1px solid #e6edf4;border-radius:22px;box-shadow:var(--shadow);overflow:hidden;margin:22px 0}.identity-head{padding:20px 22px;background:linear-gradient(135deg,#effaff,#fff8e9);border-bottom:1px solid #e7edf4}.identity-head h3{margin:0;color:var(--navy);font-size:25px}.identity-body{display:grid;grid-template-columns:1.02fr .98fr}.builder{padding:20px;border-right:1px solid #e6edf4}.preview{padding:20px;background:#f8fbff}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1 / -1}.field label{font-size:12px;font-weight:800;color:var(--navy)}.field select,.field input,.field textarea{font-family:inherit;border:1px solid #ccd8e5;border-radius:10px;padding:10px 11px;background:#fff;color:var(--ink);font-size:14px}.field textarea{min-height:82px;resize:vertical}.field select:focus,.field input:focus,.field textarea:focus{outline:0;border-color:var(--teal);box-shadow:0 0 0 3px rgba(7,139,158,.1)}
+.builder-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.preview .editor{min-height:470px}.consistency-box{margin-top:14px;background:#fff;border:1px dashed #b9cbe0;border-radius:12px;padding:13px}.consistency-box b{color:var(--navy)}
+.identity-domains{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.domain{background:#fff;border:1px solid var(--pearl);border-radius:12px;padding:11px}.domain b{display:block;color:var(--teal);font-size:13px}
+.evidence-warning{background:#fff3f4;border:1px solid #f3c8ce;border-radius:14px;padding:14px;margin-top:12px}.evidence-warning b{color:var(--red)}
+@media(max-width:900px){.evidence-grid,.identity-body{grid-template-columns:1fr}.builder{border-right:0;border-bottom:1px solid #e6edf4}.claim-ladder{grid-template-columns:1fr 1fr}.identity-domains{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.form-grid,.claim-ladder,.identity-domains{grid-template-columns:1fr}}
+
+@media print{.topnav,.copy-btn,.combo-btn,.download-btn,.reset-btn{display:none!important}.case-card{break-inside:avoid;box-shadow:none}body{background:#fff}.editor{border:0;min-height:0;height:auto;overflow:visible}}
+
+
+.app-page{display:none}.app-page.active{display:block}
+.page-tabs{position:sticky;top:0;z-index:50;background:#fff;border-bottom:3px solid var(--gold);box-shadow:0 3px 14px rgba(0,0,0,.08)}
+.page-tabs-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 18px}
+.page-tab{border:1px solid #dfe8f2;background:#fff;color:var(--navy);border-radius:12px;padding:11px 12px;font-family:inherit;font-weight:800;cursor:pointer}
+.page-tab.active{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-color:transparent}
+.page-kicker{display:inline-flex;align-items:center;gap:8px;background:var(--soft-blue);color:var(--navy);border:1px solid #cfe6f5;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800}
+.page-intro{background:#fff;border-radius:20px;border:1px solid #e6edf5;box-shadow:var(--shadow);padding:24px;margin:18px 0 28px}
+.page-intro h2{margin:8px 0;color:var(--navy);font-size:30px;line-height:1.25}
+.page-intro p{margin:6px 0;color:var(--muted)}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.mode-card{background:#fff;border:1px solid #e1e8f0;border-radius:16px;padding:18px}
+.mode-card h3{margin:0 0 8px;color:var(--navy)}
+.mode-card.pdf{border-top:5px solid var(--teal)}.mode-card.context{border-top:5px solid var(--gold)}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.action-link,.big-btn{display:inline-flex;align-items:center;gap:7px;border:0;border-radius:10px;padding:10px 13px;text-decoration:none;font-family:inherit;font-weight:800;cursor:pointer}
+.action-link{background:var(--navy);color:#fff}.big-btn{background:var(--teal);color:#fff}.big-btn.alt{background:var(--green)}
+.ab-compare{background:linear-gradient(135deg,#f7fbff,#f3fff9);border:1px dashed #9bc8d5;border-radius:18px;padding:18px;margin:20px 0}
+.ab-compare h3{margin:0 0 8px;color:var(--navy)}
+.game-wrap{background:#0b2023;border-radius:20px;padding:10px;box-shadow:0 16px 38px rgba(11,32,35,.22);margin-top:18px}
+.game-wrap iframe{width:100%;height:min(78vh,820px);min-height:640px;border:0;border-radius:14px;background:#0b2023;display:block}
+.mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.mission-card{background:#fff;border:1px solid #e5edf5;border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.mission-card h3{margin:0 0 6px;color:var(--navy);font-size:18px}.mission-card p{color:var(--muted)}
+.mission-card textarea{width:100%;min-height:300px;border:1px solid #dce6ef;border-radius:12px;padding:12px;font-family:"Sarabun",Tahoma,Arial,sans-serif;line-height:1.55;resize:vertical;background:#fbfdff}
+.game-note{background:#eefcf6;border-left:6px solid var(--green);border-radius:14px;padding:16px;margin:16px 0}
+.sponsor-note{background:#fff7e7;border-left:6px solid var(--gold);border-radius:14px;padding:16px;margin:16px 0}
+@media(max-width:900px){.mode-grid,.mission-grid{grid-template-columns:1fr}.page-tabs-inner{grid-template-columns:1fr}.game-wrap iframe{min-height:720px}}
+
+
+
+/* ===== Mobile-first workshop refinements ===== */
+.hero-credit{margin-top:5px;font-size:13px;font-weight:700;color:#fff3c6}
+.page-tabs-inner{grid-template-columns:repeat(3,minmax(0,1fr))}
+.page-tab{min-width:0}
+.activity-badge{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800;margin-bottom:8px}
+.editor{font-size:16px!important}
+.case-card,.identity-lab,.page-intro,.quicklib{scroll-margin-top:72px}
+.action-row .copy-btn{min-height:42px}
+@media(max-width:900px){
+  .page-tabs{top:0}
+  .page-tabs-inner{display:flex;gap:6px;padding:7px 8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .page-tabs-inner::-webkit-scrollbar{display:none}
+  .page-tab{flex:1 0 31%;padding:10px 8px;font-size:13px;white-space:nowrap;border-radius:10px}
+  .container{padding:20px 12px 52px}
+  .hero{padding:22px 14px 26px}
+  .hero-inner{gap:14px}
+  .hero h1{font-size:clamp(30px,10vw,44px)}
+  .hero .sub{font-size:16px;line-height:1.55}
+  .hero-card{display:none}
+  .brand-row{margin-bottom:15px;align-items:flex-start}
+  .brand-text strong{font-size:16px}
+  .brand-text small,.hero-credit{font-size:11px;line-height:1.45}
+  .chips{gap:6px}.chip{font-size:11px;padding:5px 8px}
+  .page-intro{padding:18px 14px;margin-top:10px}
+  .page-intro h2,.section-title{font-size:24px}
+  .rtf{grid-template-columns:1fr}
+  .rtf-box{padding:14px}
+  .case-card{border-radius:15px;margin:16px 0}
+  .case-head{padding:14px 12px;align-items:flex-start}
+  .case-num{width:42px;height:42px;font-size:15px}
+  .case-title-wrap h3{font-size:19px}
+  .panel{padding:14px 12px}
+  .panel-title{align-items:flex-start;flex-direction:column}
+  .copy-btn{width:100%;padding:11px 12px;font-size:14px}
+  pre{font-size:14px;line-height:1.6;padding:12px;overflow-wrap:anywhere}
+  textarea.editor{width:100%;font-size:16px!important;line-height:1.6;padding:12px;min-height:280px!important}
+  .framework-grid,.mode-grid,.mission-grid{grid-template-columns:1fr}
+  .identity-grid{grid-template-columns:1fr!important}
+  .field-row,.identity-fields{grid-template-columns:1fr!important}
+  .footer-inner{padding:18px 14px;font-size:13px}
+  .footer-inner>div:last-child{text-align:left!important}
+  .game-wrap{padding:5px;border-radius:14px}
+  .game-wrap iframe{min-height:72dvh;height:72dvh;border-radius:10px}
+}
+@media(max-width:520px){
+  .page-tab{flex:1 0 32%;font-size:12px;padding:9px 5px}
+  .page-kicker{font-size:10px}
+  .page-intro h2,.section-title{font-size:21px}
+  .section-title{margin-top:28px}
+  .case-kicker{font-size:10px}
+  .case-meta{gap:5px}.mini{font-size:10px}
+  .challenge,.followup,.discuss{padding:12px}
+  .game-wrap iframe{min-height:76dvh;height:76dvh}
+}
+
+/* ===== Medical Communication Leaders refresh ===== */
+.brand-mascot{width:82px;height:82px;border-radius:18px;background:#fff;display:grid;place-items:center;border:2px solid var(--gold);box-shadow:0 8px 20px rgba(0,0,0,.18);overflow:hidden;flex:none}
+.brand-mascot img{width:100%;height:100%;object-fit:cover;display:block}
+.formula-strip{margin-top:16px;background:linear-gradient(135deg,#eef8ff,#effaf6);border:1px solid #cfe5ee;border-radius:16px;padding:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.formula-strip b{color:var(--navy);margin-right:6px}.formula-strip span{background:#fff;border:1px solid #dbe7f0;border-radius:999px;padding:6px 10px;font-weight:800;color:var(--navy);font-size:12px}.formula-strip i{font-style:normal;color:var(--teal);font-weight:900}
+.identity-first{border-top:6px solid var(--gold)}
+.identity-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.identity-steps span{background:#fff;border:1px solid #d9e7ef;border-radius:12px;padding:9px;text-align:center;font-size:12px;font-weight:800;color:var(--navy)}
+.criteria-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0 24px}.criteria-card{background:#fff;border:1px solid #dfe8f0;border-radius:14px;padding:14px;box-shadow:var(--shadow)}.criteria-card b{display:block;color:var(--navy);margin-bottom:5px}.criteria-card span{font-size:12px;color:var(--muted)}
+.prototype-chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.prototype-chips span{background:#eaf7f6;color:#066b72;border:1px solid #bfe6e2;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800}
+.prototype-takeaway{margin:18px 0;background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:16px;padding:16px 18px;font-size:16px}.prototype-takeaway b{color:#ffe18a}
+@media(max-width:900px){.identity-steps,.criteria-grid{grid-template-columns:1fr 1fr}.brand-mascot{width:64px;height:64px}}
+@media(max-width:560px){.identity-steps,.criteria-grid{grid-template-columns:1fr}.formula-strip{align-items:flex-start}.brand-mascot{width:58px;height:58px}}
+
+.context-panel .editor{min-height:390px}
+.page-intro #medical-source-main{min-height:560px!important}
+</style>
+</head>
+<body>
+<header class="hero" id="top">
+<div class="hero-inner">
+<div>
+<div class="brand-row">
+<a class="brand-mascot" href="https://postimg.cc/svQQKMkk" rel="noopener" target="_blank"><img alt="Hmee-TU mascot" src="https://i.postimg.cc/svQQKMkk/Hmee-TU.png"/></a>
+<div class="brand-text"><strong>AI for Medical Communication Leaders</strong><small>Executive Work · Medical Communication · AI Prototype</small><div class="hero-credit">ออกแบบและเรียบเรียงกิจกรรมโดย ดร.ภก.วิรุณ เวชศิริ</div></div>
+</div>
+<div class="badge">ปสพ.1 Workshop Lab · 3 Experiences</div>
+<h1>การใช้ <span>AI</span> ในการทำงานด้านสื่อ<br/>สำหรับผู้บริหารการแพทย์</h1>
+<p class="sub">เริ่มจากสร้าง Visual Identity ของตนเอง → ใช้ AI ช่วยงานผู้บริหาร → แปลง Source ที่เชื่อถือได้เป็นสื่อหลายรูปแบบ → ปิดท้ายด้วยของที่ AI สร้างให้เล่นได้จริง</p>
+<div class="chips"><span class="chip">Good Model</span><span class="chip">RTF Prompt</span><span class="chip">Good Context</span><span class="chip">Tools</span><span class="chip">Human in the Loop</span><span class="chip">Governance</span></div>
+</div>
+<div class="hero-card"><div class="icon">🧠</div><b>3 Ways to Experience AI</b><small>สร้างตัวตน · ช่วยงานบริหาร/สื่อ · สร้าง Interactive Prototype</small></div>
+</div>
+</header>
+<nav class="page-tabs">
+<div class="page-tabs-inner">
+<button class="page-tab active" data-page="page-business">① Executive AI</button>
+<button class="page-tab" data-page="page-content">② Medical Communication</button>
+<button class="page-tab" data-page="page-game">③ AI Prototype</button>
+</div>
+</nav>
+<main class="container">
+<section class="app-page active" id="page-business">
+<div class="page-intro">
+<span class="page-kicker">PAGE 1 · IDENTITY FIRST → EXECUTIVE AI</span>
+<h2>เริ่มจาก “ตัวตนของคุณ” แล้วค่อยให้ AI ช่วยงานผู้บริหาร</h2>
+<p>สร้าง Visual Identity ก่อน เพื่อให้ภาพผู้บริหารคนเดิมถูกใช้ซ้ำในสื่อหลายชิ้นอย่างสม่ำเสมอ จากนั้นทดลอง use case ที่เป็น Quick Win และยังคง Human Judgment ไว้ที่ปลายทาง</p>
+<div class="formula-strip"><b>Effective AI Use</b><span>Good Model</span><i>×</i><span>Good Prompt</span><i>×</i><span>Good Context</span><i>×</i><span>Good Tools</span><i>×</i><span>Human in the Loop</span></div>
+</div>
+<div class="identity-lab identity-first" id="identity-first">
+<div class="activity-badge">IDENTITY FIRST · ใช้ต่อได้ทุกกิจกรรม</div>
+<div class="identity-head">
+<h3>🧑‍⚕️ Step 1 — สร้าง Medical Communication Executive Identity ของคุณก่อน</h3>
+<p style="margin:6px 0 0;color:var(--muted)">สร้าง “Character Bible” เพียงครั้งเดียว แล้วใช้ภาพ/Prompt นี้เป็น reference ต่อในโพสต์, infographic, media visual และ executive communication เพื่อให้เกิด visual consistency</p>
+<div class="identity-steps"><span>1 สร้าง Identity</span><span>2 สร้างภาพใน AI</span><span>3 เก็บภาพ/Prompt เป็น Reference</span><span>4 ใช้ซ้ำในกิจกรรมถัดไป</span></div>
+</div>
+<div class="identity-body">
+<section class="builder">
+<div class="form-grid">
+<div class="field"><label>Role</label><select id="id-role"><option selected="">Medical Communication Executive</option><option>Hospital Director / ผู้บริหารโรงพยาบาล</option><option>Physician Spokesperson</option><option>Public Health Executive</option><option>Healthcare Organization Leader</option></select></div>
+<div class="field"><label>Gender</label><select id="id-gender"><option selected="">หญิง</option><option>ชาย</option><option>ไม่ระบุ / gender-neutral</option></select></div>
+<div class="field"><label>Age</label><select id="id-age"><option>35–40 ปี</option><option selected="">45–50 ปี</option><option>50–55 ปี</option><option>55–60 ปี</option></select></div>
+<div class="field"><label>Ethnicity / Look</label><select id="id-ethnicity"><option selected="">คนไทย บุคลิกผู้บริหารมืออาชีพ</option><option>คนเอเชียตะวันออกเฉียงใต้</option><option>ไม่ระบุเชื้อชาติ เน้น professional healthcare executive</option></select></div>
+<div class="field"><label>Skin tone</label><select id="id-skin"><option>ผิวขาวเหลืองโทนอุ่น</option><option selected="">ผิวสีน้ำผึ้งสุขภาพดี</option><option>ผิวแทนโทนอุ่น</option><option>ผิวกลาง neutral tone</option></select></div>
+<div class="field"><label>Body</label><select id="id-body"><option selected="">รูปร่างสมส่วน บุคลิกสง่างามและมั่นใจ</option><option>รูปร่างเพรียว ดูคล่องแคล่ว</option><option>รูปร่างแข็งแรง ดูเป็นผู้นำ</option></select></div>
+<div class="field"><label>Face</label><select id="id-face"><option selected="">หน้ารูปไข่ สีหน้าสงบ มีรอยยิ้มบาง ๆ น่าเชื่อถือ</option><option>หน้า soft-square ดูสุขุมและมั่นใจ</option><option>หน้ากลมเล็กน้อย ดูอบอุ่นและเข้าถึงง่าย</option></select></div>
+<div class="field"><label>Eyes</label><select id="id-eyes"><option selected="">ตาสีน้ำตาลเข้ม แววตาฉลาด มั่นใจ และอบอุ่น</option><option>ตาสีน้ำตาลเข้ม แววตาสุขุม</option><option>ตาดำ แววตาเป็นมิตรและใส่ใจผู้ฟัง</option></select></div>
+<div class="field"><label>Hair / Headwear</label><select id="id-hair"><option selected="">ผมสีดำ ทรงเรียบร้อยแบบผู้บริหาร</option><option>ผมสีดำแซมเทาเล็กน้อย ทรงสุภาพ</option><option>ผมเกล้ามวยเรียบร้อย ดูเป็นมืออาชีพ</option><option>ฮิญาบสีเรียบ สุภาพ โทน navy/teal</option></select></div>
+<div class="field"><label>Outfit</label><select id="id-outfit"><option selected="">สูทหรือ blazer สีกรมท่า ทับเสื้อสีอ่อน สไตล์ healthcare executive</option><option>business formal สี navy / charcoal พร้อม name badge</option><option>smart professional blazer โทน navy–teal–white</option><option>เสื้อกาวน์แพทย์ทับชุดสุภาพ พร้อม name badge</option></select></div>
+<div class="field"><label>Accessories</label><select id="id-accessories"><option selected="">นาฬิกาข้อมือเรียบหรู + tablet / executive briefing document</option><option>แว่นตากรอบบาง + tablet</option><option>แฟ้ม briefing + ปากกา</option><option>ไม่มีเครื่องประดับเด่น</option></select></div>
+<div class="field"><label>Personality</label><select id="id-personality"><option selected="">น่าเชื่อถือ สุขุม มีภาวะผู้นำ สื่อสารชัดเจน และมี empathy</option><option>มั่นใจ กระชับ พร้อมตอบคำถามสื่อ</option><option>อบอุ่น เข้าถึงง่าย และรับฟังความคิดเห็น</option></select></div>
+<div class="field"><label>Pose</label><select id="id-pose"><option selected="">ยืนครึ่งตัว ถือ tablet / briefing document และอธิบายอย่างมั่นใจ</option><option>ยืนหน้า media briefing screen กำลังตอบคำถาม</option><option>นั่งในห้องประชุมผู้บริหาร กำลังนำเสนอประเด็น</option><option>ชี้ไปที่ infographic หรือ key message ด้านข้าง</option></select></div>
+<div class="field"><label>Setting</label><select id="id-setting"><option selected="">ห้องประชุมผู้บริหารโรงพยาบาลสมัยใหม่ พื้นหลังเบลอเล็กน้อย</option><option>media briefing room ขององค์กรสุขภาพ</option><option>โรงพยาบาลสมัยใหม่ มี healthcare-tech screen แบบไม่มีข้อมูลผู้ป่วย</option><option>พื้นหลังเรียบ premium healthcare-tech ไม่มีตัวอักษร</option></select></div>
+<div class="field"><label>Lighting</label><select id="id-lighting"><option selected="">แสงนุ่มนวล สะอาด ดูน่าเชื่อถือ</option><option>bright clean healthcare lighting</option><option>studio softbox lighting แบบ premium editorial</option></select></div>
+<div class="field"><label>Visual style</label><select id="id-style"><option selected="">premium editorial illustration, professional healthcare-tech</option><option>semi-realistic healthcare executive illustration</option><option>clean 3D professional character</option><option>photorealistic commercial healthcare portrait</option></select></div>
+<div class="field"><label>Aspect ratio / Use</label><select id="id-ratio"><option>1:1 — Profile / avatar</option><option>4:5 — Social post / character card</option><option selected="">16:9 — Presentation / media visual</option><option>9:16 — Story / vertical video cover</option></select></div>
+<div class="field full"><label>Brand colors</label><input id="id-colors" value="navy, teal, white, subtle gold accent; premium healthcare-tech"/></div>
+<div class="field full"><label>Identity rule / สิ่งที่ต้องคงที่</label><textarea id="id-extra">ให้คงใบหน้า ทรงผม/แว่น เสื้อผ้าหลัก โทนสี และบุคลิกเดิมทุกครั้ง เพื่อใช้เป็น visual identity ของผู้บริหารคนเดิมในหลายชิ้นงาน เปลี่ยนเฉพาะ pose / scene / prop / message theme</textarea></div>
+</div>
+<div class="builder-actions"><button class="download-btn" id="build-identity" type="button">สร้าง Identity Prompt</button><button class="copy-btn" id="copy-identity" type="button">คัดลอก Prompt</button><button class="reset-btn" id="reset-identity" type="button">คืนค่าตัวอย่าง</button></div>
+<div class="identity-domains"><div class="domain"><b>Core Identity — คงที่</b>Face · Eyes · Hair · Outfit · Signature accessories</div><div class="domain"><b>Campaign Variable — เปลี่ยนได้</b>Pose · Setting · Prop · Message theme</div><div class="domain"><b>Brand Layer</b>Color palette · Lighting · Visual style · Composition</div></div>
+</section>
+<section class="preview">
+<div class="panel-title"><span>🖼️ GENERATED IDENTITY PROMPT</span></div>
+<textarea class="editor" id="identity-prompt" readonly=""></textarea>
+<div class="consistency-box"><b>🔁 Consistency Follow-up Prompt</b><div id="identity-follow" style="white-space:pre-wrap;margin-top:6px">ใช้ character identity เดิมจากภาพก่อนหน้าอย่างเคร่งครัด รักษาใบหน้า ทรงผม/แว่น เสื้อผ้าหลัก สี และบุคลิกเดิม เปลี่ยนเฉพาะ pose / scene / prop ตามโจทย์ใหม่ ห้าม redesign ตัวละคร</div></div>
+<div class="evidence-warning" style="background:#f4fbf7;border-color:#cce8dc"><b style="color:var(--green)">Visual Safety:</b> ไม่ใส่ข้อมูลผู้ป่วยที่ระบุตัวได้ ไม่สร้าง medical claim บนภาพ ไม่ปลอมโลโก้/เอกสาร และตรวจมือ ใบหน้า อุปกรณ์ และข้อความก่อนใช้จริง</div>
+</section>
+</div>
+</div>
+<div class="callout"><b>💡 ทำไม Context ใน Workshop จึงยาวขึ้น?</b> เพราะผู้บริหารไม่ควรทดลอง AI จากโจทย์สั้น ๆ ที่ไม่มีรายละเอียดจริง — Context ที่ดีควรมี Fact, Stakeholder, Timeline, Constraint, สิ่งที่รู้/ยังไม่รู้ และจุดที่ต้องใช้ Human Judgment เพื่อให้เห็นว่า AI ช่วย “จัดการความซับซ้อน” ได้อย่างไร</div>
+<div class="group-label"><span class="pill">EXECUTIVE QUICK WINS</span><h2>เริ่มจากงานซ้ำ ใช้เวลามาก มีข้อมูลต้นทาง และยังมีคนตรวจปลายทาง</h2></div>
+<div class="criteria-grid">
+<div class="criteria-card"><b>🔁 ทำซ้ำบ่อย</b><span>ประชุม สรุปประเด็น อัปเดตโครงการ</span></div>
+<div class="criteria-card"><b>⏱️ ประหยัดเวลาได้จริง</b><span>ลดเวลาร่าง คัด และเรียบเรียง</span></div>
+<div class="criteria-card"><b>🛡️ ความเสี่ยงไม่สูงเกินไป</b><span>ไม่ให้ AI วินิจฉัยหรือตัดสินแทนคน</span></div>
+<div class="criteria-card"><b>📎 มี Source/Context</b><span>มีเอกสาร ข้อเท็จจริง หรือ transcript</span></div>
+<div class="criteria-card"><b>👥 มี Human Reviewer</b><span>ผู้บริหาร/ผู้เชี่ยวชาญตรวจปลายทาง</span></div>
+</div>
+<article class="case-card" id="case-exec-01"><div class="case-head"><div class="case-num">01</div><div class="case-title-wrap"><div class="case-kicker">MANAGEMENT · MEETING</div><h3>📝 Meeting → Executive Brief / Decisions / Action Items</h3><div class="case-meta"><span class="mini framework">RTF + Context</span><span class="mini level">Quick Win</span><span class="mini data">Amber / Internal</span></div></div></div><div class="two-col">
+<section class="panel context-panel"><div class="panel-title"><span>📎 CONTEXT — ตัวอย่างจำลอง</span><button class="copy-btn" data-copy="context-x01">คัดลอก Context</button></div><textarea class="editor" id="context-x01">สถานการณ์จำลอง: การประชุมคณะทำงาน “Health Literacy & Trusted Communication 2027” ขององค์กรสุขภาพระดับประเทศ
+
+วันประชุม: 15 กันยายน 2569 เวลา 09.00–10.30 น.
+ผู้เข้าร่วม: รองผู้อำนวยการฝ่ายการแพทย์, หัวหน้าฝ่ายสื่อสารองค์กร, ตัวแทนทีมวิชาการ, ทีมดิจิทัล, ฝ่ายกฎหมาย/คุ้มครองข้อมูล, เลขานุการโครงการ
+
+เป้าหมายการประชุม:
+- เตรียม Health Literacy Campaign ไตรมาส 4 สำหรับประชาชนทั่วไป
+- ลดความสับสนจากข้อมูลสุขภาพที่กระจายหลายช่องทาง
+- ทำให้สารจากแพทย์ ผู้บริหาร เว็บไซต์ และ social media สอดคล้องกัน
+
+ข้อเท็จจริงที่รายงานในที่ประชุม:
+- ไตรมาสที่ผ่านมา ทีมสื่อผลิต content เฉลี่ย 38 ชิ้น/เดือน แต่ใช้เวลา review 2–7 วันต่อชิ้น
+- 3 เดือนล่าสุดมีคำถามซ้ำใน inbox และ call center จำนวนมากเรื่อง “ข้อมูลไหนเป็นคำแนะนำทั่วไป และข้อมูลไหนต้องพบแพทย์”
+- ทีมวิชาการมีเอกสารที่อนุมัติแล้วหลายฉบับ แต่ยังไม่มีรูปแบบ Key Message กลางสำหรับทีมสื่อ
+- Facebook เข้าถึงประชาชนได้มาก แต่โพสต์ยาวมี engagement ต่ำกว่า infographic และ short video
+- ฝ่ายกฎหมายแจ้งว่าต้องหลีกเลี่ยงการนำข้อมูลผู้ป่วยจริงมาใช้เป็นตัวอย่างหากยังไม่มีฐาน/สิทธิที่เหมาะสม
+
+สิ่งที่ที่ประชุม “ตัดสินใจแล้ว”:
+1) ใช้หลัก One Source → Many Outputs โดยทุกชิ้นต้องย้อนกลับไปยัง source ที่ตรวจแล้วได้
+2) ทีมวิชาการจะส่ง Key Message ฉบับตรวจแล้วของ 3 หัวข้อแรกภายในวันศุกร์ที่ 18 ก.ย.
+3) ทีมสื่อจะเตรียม FAQ, Facebook post, website summary และ media briefing จาก source เดียวกัน
+4) ทุก content ที่เกี่ยวกับ clinical recommendation ต้องมี medical reviewer ก่อนเผยแพร่
+5) ผู้บริหารต้องอนุมัติ final message สำหรับประเด็นที่อาจกระทบชื่อเสียงองค์กร
+
+สิ่งที่ “ยังไม่ตัดสินใจ”:
+- ใครจะเป็น spokesperson หลักของ campaign
+- SLA การ review ที่เหมาะสม: 24, 48 หรือ 72 ชั่วโมง
+- ช่องทางใดจะเป็น source of truth หลักเมื่อข้อมูลใน social media กับเว็บไซต์ไม่ตรงกัน
+- จะใช้ AI ในขั้นตอนใดได้บ้าง และขั้นตอนไหนต้องเป็น Human-only
+
+งานที่ได้รับมอบหมาย:
+- ทีมวิชาการ: ทำ Key Message 3 หัวข้อแรก — deadline 18 ก.ย.
+- ทีมสื่อ: ร่าง FAQ + channel plan — deadline ยังไม่ระบุ
+- ทีมดิจิทัล: เสนอหน้า landing page กลาง — deadline 22 ก.ย.
+- ฝ่ายกฎหมาย/PDPA: เสนอ checklist ข้อมูลที่ห้ามป้อนเข้า Public AI — deadline 22 ก.ย.
+- เลขานุการโครงการ: นัด review รอบถัดไปวันที่ 25 ก.ย.
+
+ความเสี่ยงที่ถูกพูดถึง:
+- หากสื่อเร็วเกินไปอาจเกิด medical claim เกิน source
+- หาก review ช้าเกินไปจะเสียจังหวะเมื่อเกิดข่าวหรือคำถามสาธารณะ
+- ถ้าแต่ละทีมใช้ AI คนละแบบโดยไม่มี policy อาจเกิดข้อมูลคลาดเคลื่อนและ data leakage
+
+หมายเหตุ:
+ข้อมูลทั้งหมดเป็นสถานการณ์จำลองสำหรับ Workshop ไม่มีข้อมูลผู้ป่วยจริงและไม่ใช่นโยบายขององค์กรใด</textarea></section>
+<section class="panel prompt-panel"><div class="panel-title"><span>💬 PROMPT — RTF</span><button class="copy-btn" data-copy="prompt-x01">คัดลอก Prompt</button></div><textarea class="editor" id="prompt-x01">R — Role:
+คุณเป็น Executive Assistant ของผู้บริหารองค์กรสุขภาพ
+
+T — Task:
+สรุป Context การประชุมนี้ โดยแยกสาระสำคัญ สิ่งที่ตัดสินใจ งานที่ต้องทำต่อ และเรื่องที่ยังไม่ชัด
+
+F — Format:
+1) Executive Summary 5 bullet
+2) Decisions
+3) Action Items | Owner | Deadline
+4) Open Issues / Risks
+5) สิ่งที่ผู้บริหารต้องตัดสินใจในครั้งถัดไป
+
+Guardrail:
+ห้ามสร้าง owner, deadline หรือ decision ที่ไม่มีใน Context ให้ใส่ “ยังไม่ระบุ” แทน</textarea><div class="case-tools"><button class="combo-btn" data-copyboth="prompt-x01|context-x01">คัดลอก Prompt + Context</button><button class="reset-btn" data-reset="x01">คืนค่า Sample</button></div></section></div><div class="challenge"><strong>🎯 ลองสังเกต:</strong> AI แยก “สิ่งที่ตัดสินใจแล้ว” กับ “สิ่งที่ยังต้องตัดสินใจ” ได้หรือไม่?</div></article>
+<article class="case-card" id="case-exec-02"><div class="case-head"><div class="case-num">02</div><div class="case-title-wrap"><div class="case-kicker">DECISION SUPPORT</div><h3>🧭 Issue → Executive Decision Brief</h3><div class="case-meta"><span class="mini framework">RTF + Options</span><span class="mini level">กลาง</span><span class="mini data">Green/Amber</span></div></div></div><div class="two-col">
+<section class="panel context-panel"><div class="panel-title"><span>📎 CONTEXT — สถานการณ์จำลอง</span><button class="copy-btn" data-copy="context-x02">คัดลอก Context</button></div><textarea class="editor" id="context-x02">สถานการณ์จำลอง: Viral Post อ้างว่าองค์กรวิชาชีพ “เปลี่ยนคำแนะนำทางการแพทย์แล้ว”
+
+เวลา 08.15 น. ทีม Social Listening พบโพสต์บน Facebook และ TikTok อ้างว่า “องค์กรวิชาชีพได้เปลี่ยนแนวทางเรื่องการดูแลภาวะ X แล้ว และคำแนะนำเดิมใช้ไม่ได้อีกต่อไป”
+ภายในเวลา 10.30 น. โพสต์ต้นทางมียอดแชร์ประมาณ 8,400 ครั้ง และมีสื่อออนไลน์ 3 แห่งติดต่อขอสัมภาษณ์
+
+สิ่งที่องค์กร “ยืนยันได้” ณ เวลา 11.00 น.:
+- เว็บไซต์ทางการยังแสดงแนวทางฉบับเดิม และยังไม่มีประกาศฉบับใหม่
+- คณะทำงานวิชาการกำลังทบทวนหลักฐานใหม่จริง แต่ยังไม่ได้ลงมติหรืออนุมัติคำแนะนำใหม่
+- ไม่มีเอกสารประชุมหรือร่างภายในฉบับใดที่ได้รับอนุมัติให้เผยแพร่สู่สาธารณะ
+- ทีมสื่อพบว่าภาพที่แนบในโพสต์ไวรัลตัดบางส่วนมาจากสไลด์การประชุมวิชาการเก่าและไม่มีบริบทครบถ้วน
+- ฝ่ายกฎหมายแนะนำให้หลีกเลี่ยงการใช้คำว่า “ข่าวปลอม” จนกว่าจะตรวจต้นทางครบ
+
+สิ่งที่องค์กร “ยังไม่รู้ / ยังยืนยันไม่ได้”:
+- ใครเป็นผู้สร้างโพสต์ต้นทาง
+- มีเอกสารภายในหลุดออกไปจริงหรือไม่
+- หลักฐานใหม่จะนำไปสู่การเปลี่ยน guideline หรือไม่
+- คณะทำงานวิชาการจะสรุปได้เมื่อใด
+
+แรงกดดันด้านเวลา:
+- นักข่าวโทรมาขอ statement ภายใน 13.00 น.
+- ผู้บริหารมีประชุมภายนอกเวลา 14.30 น. และต้องการ briefing ก่อนออกเดินทาง
+- Call center เริ่มได้รับคำถามจากประชาชนว่า “ต้องเปลี่ยนการดูแลตัวเองทันทีหรือไม่”
+
+ตัวเลือกเบื้องต้นที่ทีมเสนอ:
+A) ยังไม่ตอบสื่อจนกว่าคณะวิชาการจะประชุมเสร็จ
+B) ออก holding statement สั้น ๆ ว่า “ขณะนี้ยังไม่มีประกาศเปลี่ยนคำแนะนำ และอยู่ระหว่างตรวจสอบข้อมูล”
+C) แถลงข่าวทันทีพร้อมอธิบายรายละเอียดของหลักฐานที่กำลังทบทวน
+
+ข้อจำกัด/Guardrails:
+- ห้ามพูดเสมือนว่ามี guideline ใหม่แล้ว
+- ห้ามเปิดเผยเอกสาร draft ภายใน
+- ห้ามให้คำแนะนำเฉพาะบุคคลจากข้อมูลสถานการณ์นี้
+- ทุกข้อความต่อสาธารณะต้องแยก What we know / What we do not know / What we are doing ให้ชัด
+
+หมายเหตุ: สถานการณ์และตัวเลขทั้งหมดเป็นข้อมูลจำลองเพื่อการเรียนรู้</textarea></section>
+<section class="panel prompt-panel"><div class="panel-title"><span>💬 PROMPT — RTF</span><button class="copy-btn" data-copy="prompt-x02">คัดลอก Prompt</button></div><textarea class="editor" id="prompt-x02">R — Role:
+คุณเป็น Executive Communication Advisor ขององค์กรวิชาชีพสุขภาพ
+
+T — Task:
+ใช้เฉพาะ Context นี้ สร้าง Decision Brief เพื่อให้ผู้บริหารเลือกแนวทางตอบสนองต่อสถานการณ์
+
+F — Format:
+A) What we know / What we do not know
+B) 3 Response Options
+C) Benefit / Risk ของแต่ละ Option
+D) Recommended next step พร้อมเหตุผล
+E) ข้อความที่ “ยังไม่ควรพูด” เพราะข้อมูลไม่พอ
+
+Guardrail:
+ห้ามเขียนเสมือนว่าองค์กรมีคำแนะนำใหม่แล้ว และห้ามสร้างข้อเท็จจริงนอก Context</textarea><div class="case-tools"><button class="combo-btn" data-copyboth="prompt-x02|context-x02">คัดลอก Prompt + Context</button><button class="reset-btn" data-reset="x02">คืนค่า Sample</button></div></section></div></article>
+<article class="case-card" id="case-exec-03"><div class="case-head"><div class="case-num">03</div><div class="case-title-wrap"><div class="case-kicker">VOICE OF PUBLIC / PATIENTS</div><h3>💬 Feedback → Theme / Priority / Management Insight</h3><div class="case-meta"><span class="mini framework">RTF + Qualitative Insight</span><span class="mini level">กลาง</span><span class="mini data">Green / Anonymous</span></div></div></div><div class="two-col">
+<section class="panel context-panel"><div class="panel-title"><span>📎 CONTEXT — Feedback ไม่ระบุตัวตน</span><button class="copy-btn" data-copy="context-x03">คัดลอก Context</button></div><textarea class="editor" id="context-x03">สถานการณ์จำลอง: Voice of Public / Patient / Media Feedback หลังองค์กรเปิดตัว “ศูนย์ข้อมูลสุขภาพออนไลน์” มา 8 สัปดาห์
+
+ช่องทางที่เก็บ Feedback:
+- แบบประเมินท้ายหน้าเว็บไซต์ 9 ความเห็น
+- Inbox / Social comment 7 ความเห็น
+- Call center summary 4 ความเห็น
+ข้อมูลต่อไปนี้ถูก de-identify แล้วและใช้เพื่อ Workshop เท่านั้น
+
+ตัวอย่างความคิดเห็น:
+1) “ข้อมูลดูน่าเชื่อถือ แต่ศัพท์วิชาการเยอะ อ่านแล้วไม่แน่ใจว่าต้องทำอะไรต่อ”
+2) “อยากได้สรุป 3 ข้อบนสุด ก่อนรายละเอียดเต็ม”
+3) “FAQ หาไม่เจอ ต้องคลิกหลายครั้ง”
+4) “เวลามีข่าวสุขภาพใหม่ อยากให้หน่วยงานชี้แจงเร็วขึ้นกว่านี้”
+5) “อินโฟกราฟิกอ่านง่าย แต่บางภาพไม่เห็นแหล่งอ้างอิง”
+6) “ชอบคลิปสั้นจากแพทย์ แต่ถ้าเป็นเรื่องสำคัญอยากมีลิงก์อ่านต่อ”
+7) “ข้อความบางชิ้นใน Facebook กับเว็บไซต์ใช้คำไม่เหมือนกัน เลยไม่แน่ใจว่าอันไหนล่าสุด”
+8) “อยากให้มีวันที่อัปเดตข้อมูลชัด ๆ เพราะกลัวอ่านข้อมูลเก่า”
+9) “ถ้ามี AI chatbot อยากรู้ว่าคำตอบมาจากเอกสารไหน”
+10) “อยากมีปุ่มแชร์เฉพาะ Key Message ไม่ใช่แชร์ทั้งบทความยาว”
+11) “ผู้สูงอายุในครอบครัวอ่านตัวหนังสือบน infographic ไม่ชัด”
+12) “มีคำว่า ‘ควร’ หลายจุด แต่ไม่รู้ว่าเป็นคำแนะนำทั่วไปหรือใช้กับทุกคน”
+13) “เวลาโทร call center เจ้าหน้าที่ตอบไม่เหมือนกับโพสต์ล่าสุดใน Facebook”
+14) “อยากได้ภาษาอังกฤษสำหรับญาติที่ไม่อ่านไทย”
+15) “ชอบที่มีแพทย์ออกมาอธิบาย แต่บางคลิปยาว 12 นาทีเกินไป”
+16) “ถ้าเป็นเรื่องด่วน อยากมีช่อง ‘สิ่งที่รู้แล้ว / สิ่งที่ยังไม่รู้’”
+17) “เคยเห็นเพจอื่นเอา logo องค์กรไปใช้กับข้อความที่องค์กรไม่ได้พูด”
+18) “อยากให้มีวิธีแจ้งข้อมูลผิดหรือภาพปลอมที่แอบอ้างองค์กร”
+19) “หน้าเว็บบนมือถือบางส่วนอ่านยาก ตารางล้นจอ”
+20) “อยากได้คำตอบว่าเมื่อไรควรพบแพทย์ แต่เข้าใจว่าข้อมูลออนไลน์แทนการตรวจไม่ได้”
+
+ข้อมูลเชิงระบบที่ทีมมีเพิ่มเติม:
+- Top 3 หน้าที่มีคนออกเร็วที่สุดคือบทความยาวที่ไม่มี summary box
+- หน้า FAQ มีผู้เข้าชมสูง แต่ search ภายในเว็บไซต์ยังใช้งานยาก
+- ยังไม่มีมาตรฐานเดียวเรื่อง Source note, Last updated และ Reviewer name
+
+ข้อจำกัดของข้อมูล:
+- Feedback 20 ข้อนี้ไม่ใช่ random sample และไม่ใช่ตัวแทนประชากรทั้งหมด
+- ห้ามแปลงจำนวนความเห็นเป็น prevalence หรือเปอร์เซ็นต์ของประชาชน
+- ไม่มีข้อมูล demographic รายบุคคล
+- ใช้ได้เพื่อหา Theme / Pain Point / Hypothesis สำหรับทดลองปรับปรุงเท่านั้น</textarea></section>
+<section class="panel prompt-panel"><div class="panel-title"><span>💬 PROMPT — RTF</span><button class="copy-btn" data-copy="prompt-x03">คัดลอก Prompt</button></div><textarea class="editor" id="prompt-x03">R — Role:
+คุณเป็น Public Communication Insight Analyst
+
+T — Task:
+Coding Feedback ใน Context เป็น Themes โดยคง evidence phrase และเสนอ improvement ideas ที่ตอบ pain point
+
+F — Format:
+1) Comment # | Theme | Evidence phrase
+2) Theme Summary
+3) Management Implications 5 ข้อ
+4) Impact–Effort Matrix
+5) Quick Wins 3 ข้อ
+6) สิ่งที่ “ยังสรุปไม่ได้” จาก sample นี้
+
+Guardrail:
+ห้ามเปลี่ยนจำนวนความคิดเห็นเป็น % ของประชาชนทั้งหมด และห้ามอ้างว่า sample นี้เป็นตัวแทนประชากร</textarea><div class="case-tools"><button class="combo-btn" data-copyboth="prompt-x03|context-x03">คัดลอก Prompt + Context</button><button class="reset-btn" data-reset="x03">คืนค่า Sample</button></div></section></div></article>
+<article class="case-card" id="case-exec-04"><div class="case-head"><div class="case-num">04</div><div class="case-title-wrap"><div class="case-kicker">WORKFLOW ENGINEERING</div><h3>🔁 งานประจำ → AI Opportunity Map + Human Checkpoint</h3><div class="case-meta"><span class="mini framework">RTF + Workflow</span><span class="mini level">ต่อยอด</span><span class="mini data">Customize</span></div></div></div><div class="two-col">
+<section class="panel context-panel"><div class="panel-title"><span>📎 CONTEXT — ให้ผู้เรียนปรับเอง</span><button class="copy-btn" data-copy="context-x04">คัดลอก Context</button></div><textarea class="editor" id="context-x04">ตัวอย่าง Workflow ปัจจุบัน: “Weekly Medical Communication Update” ขององค์กรสุขภาพ
+
+วัตถุประสงค์:
+ทุกวันศุกร์ต้องส่ง Executive Update 1 หน้าให้ผู้บริหาร และเตรียม content priorities สำหรับสัปดาห์ถัดไป
+
+Workflow ปัจจุบัน:
+Step 1 — Monitoring
+ทีมสื่อรวบรวมข่าวสุขภาพ กระแส social media คำถามจาก call center และประเด็นจากหน่วยงานภายใน
+Input: ข่าว, social links, call-center summary, email
+Risk: ข่าวบางชิ้นยังไม่ผ่านการยืนยัน
+
+Step 2 — Triage
+เจ้าหน้าที่สื่อ 1 คนจัดกลุ่มเป็น Routine / Emerging / High-risk
+ปัญหา: เกณฑ์ยังเป็น tacit knowledge และแต่ละคนจัดระดับไม่เหมือนกัน
+
+Step 3 — Evidence Retrieval
+ถ้าเป็นประเด็นวิชาการ ทีมสื่อส่งให้ทีมแพทย์/วิชาการหา guideline, policy หรือแหล่งอ้างอิง
+เวลาเฉลี่ย: 2–6 ชั่วโมงต่อประเด็น
+Risk: ใช้เอกสารคนละ version
+
+Step 4 — Draft Brief
+ทีมสื่อร่าง “What happened / What we know / What we do not know / Suggested response”
+ปัญหา: format ไม่คงที่และมักมีรายละเอียดมากเกินสำหรับผู้บริหาร
+
+Step 5 — Medical Review
+แพทย์หรือผู้เชี่ยวชาญตรวจ clinical accuracy
+Human-only point: ตัดสินว่า claim ใดเหมาะสมและความไม่แน่นอนควรสื่ออย่างไร
+
+Step 6 — Legal / Privacy Review
+เฉพาะเรื่องที่มีข้อมูลบุคคล ประเด็นคดี หรือ policy-sensitive content
+ปัญหา: บางครั้งส่ง review ช้าเพราะไม่รู้ว่าเรื่องใดต้องเข้า legal ตั้งแต่ต้น
+
+Step 7 — Executive Approval
+ผู้บริหารอนุมัติเฉพาะ High-risk issue หรือ official statement
+ปัญหา: briefing มาถึงไม่พร้อม decision options
+
+Step 8 — Publish / Distribute
+ทีมสื่อส่ง Executive Update และนำสารที่อนุมัติแล้วไปใช้กับ website / social / media response
+
+Step 9 — Archive
+ปัจจุบันเก็บไฟล์ในหลาย folder และยังไม่มี source-of-truth registry ว่า version ไหน final
+
+ข้อมูลและข้อจำกัด:
+- ห้ามนำข้อมูลผู้ป่วยที่ระบุตัวตนได้เข้า Public AI
+- Internal draft, legal issue และข้อมูลที่ยังไม่เปิดเผยจัดเป็น Amber/Confidential ตาม policy องค์กร
+- AI สามารถช่วย summarize, classify, draft และ compare sources ได้ แต่ final clinical judgment / legal decision / approval ต้องเป็นคน
+- องค์กรยังไม่มี AI policy กลางและยังไม่ได้กำหนด platform ที่อนุมัติอย่างเป็นทางการ
+
+โจทย์สำหรับผู้เรียน:
+ใช้ workflow นี้เป็นต้นแบบ วิเคราะห์ว่า Task ไหนเหมาะกับ AI Assist / AI Draft / AI Analyze / Human-only และเลือก 1 Quick Win สำหรับ pilot 2 สัปดาห์</textarea></section>
+<section class="panel prompt-panel"><div class="panel-title"><span>💬 PROMPT — RTF</span><button class="copy-btn" data-copy="prompt-x04">คัดลอก Prompt</button></div><textarea class="editor" id="prompt-x04">R — Role:
+คุณเป็น AI Workflow Coach สำหรับองค์กรสุขภาพ โดยให้ AI เป็น Co-pilot ไม่ใช่ผู้ตัดสินแทนคน
+
+T — Task:
+จาก workflow ใน Context:
+1) แตกเป็น Task ย่อย
+2) ระบุ AI Assist / AI Draft / AI Analyze / Human-only
+3) ระบุ Input / Output / Verification / Risk
+4) เลือก 1 Task ที่เหมาะเป็น Pilot
+5) ใส่ Human checkpoint และ Governance ที่จำเป็น
+
+F — Format:
+ตาราง Task | AI role | Human checkpoint | Source/Context | Risk | Output
+จากนั้นสรุป 2-week Pilot + KPI 4 ข้อ
+
+หลักการ:
+ยิ่ง AI มี Autonomy สูง ยิ่งต้องมี Guardrails และ Human Oversight มากขึ้น</textarea><div class="case-tools"><button class="combo-btn" data-copyboth="prompt-x04|context-x04">คัดลอก Prompt + Context</button><button class="reset-btn" data-reset="x04">คืนค่า Sample</button></div></section></div></article>
+<div class="quicklib"><h2>⚡ Executive Follow-up Prompt Library</h2>
+<code>ช่วยตรวจคำตอบเดิมของคุณ แล้วแบ่งทุกข้อความเป็น: Fact from Context | Interpretation | Hypothesis | Data gap</code>
+<code>ช่วยย่อผลลัพธ์นี้ให้ผู้บริหารอ่านจบใน 60 วินาที: 3 Signals | 2 Risks | 3 Next Actions | 2 Decisions Needed</code>
+<code>ช่วยทำ Pre-mortem: สมมติแผนนี้ล้มเหลวใน 90 วัน มีสาเหตุอะไรบ้าง? แยก Prevent / Monitor / Outside control</code></div>
+</section>
+<section class="app-page" id="page-content">
+<div class="page-intro">
+<span class="page-kicker">PAGE 2 · CASE-BASED MEDICAL COMMUNICATION</span>
+<h2>Medical Communication Lab — แต่ละสถานการณ์มี Context ของตัวเอง</h2>
+<p>แต่ละกิจกรรมด้านล่างเป็นสถานการณ์จำลองที่แยกจากกัน และมี <b>Context / Source / ข้อจำกัด</b> ของตัวเอง ผู้เรียนจึงสามารถเลือกทดลองเป็นรายกรณีได้ทันที โดยไม่ต้องอ้างอิง Context กลางจากด้านบน</p>
+<div class="callout"><b>📎 Trusted Source First:</b> ให้ AI เริ่มจากข้อมูลที่องค์กรยืนยันแล้ว ไม่ใช่เริ่มจากสิ่งที่ AI จำมาเอง หาก Context ไม่ได้ให้ข้อมูลบางเรื่อง ต้องระบุว่า <b>“ข้อมูลไม่เพียงพอ / Source ไม่ได้กำหนด”</b> แทนการเติมข้อเท็จจริงเอง</div>
+<div class="workshop-flow"><div class="flow-step"><b>SOURCE</b>ใช้ Context ของ Case นั้น</div><div class="flow-step"><b>UNDERSTAND</b>Fact / Unknown / Constraint</div><div class="flow-step"><b>TRANSFORM</b>ปรับตาม Audience</div><div class="flow-step"><b>CREATE</b>Brief / FAQ / Q&amp;A / Visual</div><div class="flow-step"><b>VERIFY</b>Source / Tone / Risk / Human Review</div></div>
+<div class="disclosure"><strong>📌 หมายเหตุสำหรับ Workshop</strong><br/>สถานการณ์ทั้งหมดในหน้านี้เป็น <b>Synthetic Workshop Cases</b> ที่ออกแบบให้ใกล้เคียงงานของผู้บริหารองค์กรการแพทย์และทีมสื่อสารสุขภาพ <b>ไม่ใช่ประกาศ ข้อบังคับ หรือเอกสารจริงของแพทยสภาหรือองค์กรใด</b> หากนำแนวทางไปใช้จริง ต้องแทนที่ Context จำลองด้วยเอกสารทางการขององค์กรและผ่าน Human Review ตามกระบวนการจริง</div>
+</div>
+<div class="group-label"><span class="pill">KNOWLEDGE</span><h2>① Guideline / Policy → Key Message</h2></div>
+<article class="case-card"><div class="case-head"><div class="case-num">01</div><div class="case-title-wrap"><div class="case-kicker">KNOWLEDGE</div><h3>📚 Source → Key Message ที่ทีมสื่อใช้ต่อได้</h3><div class="case-meta"><span class="mini framework">RTF</span><span class="mini data">Source-grounded</span></div></div></div><div class="two-col">
+<section class="panel context-panel"><div class="panel-title"><span>📎 CONTEXT</span><button class="copy-btn" data-copy="context-m01">คัดลอก Context</button></div><textarea class="editor" id="context-m01">สถานการณ์จำลอง: องค์กรวิชาชีพทางการแพทย์กำลังเตรียมประกาศ “หลักการสื่อสารข้อมูลสุขภาพดิจิทัลอย่างรับผิดชอบ” ให้หน่วยงานภายในใช้เป็นกรอบร่วมกัน
+
+SOURCE BRIEF ที่องค์กรยืนยันแล้วสำหรับกิจกรรมนี้:
+1) เนื้อหาที่เผยแพร่ในนามองค์กรควรตรวจสอบย้อนกลับไปยัง guideline, policy, official data หรือเอกสารที่องค์กรอนุมัติได้
+2) ควรแยกข้อมูลสุขภาพทั่วไปออกจากคำแนะนำทางการแพทย์เฉพาะบุคคลอย่างชัดเจน
+3) ข้อมูลผู้ป่วยและข้อมูลอ่อนไหวขององค์กรต้องพิจารณา Privacy, Confidentiality, Data Classification และ Minimum Necessary ก่อนนำเข้า AI
+4) Generative AI ช่วยค้น สรุป ร่าง ปรับภาษา สร้างคำถาม และช่วยออกแบบสื่อได้ แต่ Output ไม่ถือว่าผ่านการรับรองโดยอัตโนมัติ
+5) ก่อนเผยแพร่ ผู้รับผิดชอบต้องตรวจ Accuracy, Source fidelity, Tone, Audience fit, Privacy และข้อจำกัดทางวิชาชีพ/กฎหมายที่เกี่ยวข้อง
+6) ประเด็นเสี่ยงสูง เช่น clinical advice, outbreak, adverse event, crisis communication, official statement หรือเรื่องวินัยวิชาชีพ ควรมี expert review สูงกว่าปกติ
+7) หากพบข้อมูลผิด ควรมีกระบวนการ Correction / Update ที่ตรวจสอบย้อนหลังได้ว่าแก้อะไร เมื่อไร และโดยใคร
+8) ความรับผิดชอบต่อเนื้อหาที่เผยแพร่ยังอยู่กับมนุษย์และองค์กร ไม่ได้ย้ายไปที่ AI
+
+สิ่งที่ Source Brief นี้ “ไม่ได้กำหนด”:
+- ไม่ได้ระบุว่า AI platform หรือ model ใดได้รับอนุญาตให้ใช้จริง
+- ไม่ได้กำหนด SLA การ review หรือ approval hierarchy
+- ไม่ได้กำหนดบทลงโทษหรือข้อกฎหมายเฉพาะ
+- ไม่ได้แทน clinical guideline หรือคำแนะนำรายบุคคล
+
+ผู้ใช้ Output นี้:
+- ทีมสื่อสารองค์กร
+- ทีมวิชาการ/แพทย์ผู้ทบทวนเนื้อหา
+- ทีม Digital / Website
+- Call center / ผู้ตอบคำถามสาธารณะ
+- ผู้บริหารที่ต้องการเห็นสารสำคัญก่อนอนุมัติ communication plan
+
+โจทย์ผู้บริหาร:
+แต่ละทีมตีความคำว่า “ใช้ AI ได้” ไม่เหมือนกัน บางทีมใช้ AI ร่าง post บางทีมใช้สรุปเอกสาร และบางทีมยังไม่กล้าใช้เลย ผู้บริหารจึงต้องการ Key Message กลางที่ทำให้ทุกฝ่ายเข้าใจตรงกันว่า AI ช่วยตรงไหนได้ คนต้องตรวจอะไร ข้อมูลแบบใดต้องระวัง และประเด็นใดต้องยกระดับ expert review
+
+ข้อจำกัด:
+- ห้ามตีความ Source Brief จำลองนี้เป็นข้อบังคับจริงของแพทยสภา
+- ห้ามเพิ่ม platform name, ข้อกฎหมาย, บทลงโทษ หรือ SLA ที่ Source Brief ไม่ได้ระบุ
+- ต้องแยก “Source บอกชัด” กับ “สิ่งที่องค์กรต้องออกแบบเอง”
+- หากข้อมูลไม่พอ ให้ใช้คำว่า “Source ไม่ได้กำหนด” แทนการเติมคำตอบเอง</textarea></section>
+<section class="panel prompt-panel"><div class="panel-title"><span>💬 PROMPT — RTF</span><button class="copy-btn" data-copy="prompt-m01">คัดลอก Prompt</button></div><textarea class="editor" id="prompt-m01">R — Role:
+คุณเป็น Medical Communication Editor ขององค์กรวิชาชีพสุขภาพ
+
+T — Task:
+สรุป Source Context นี้เป็นสารสำคัญสำหรับทีมสื่อ โดยรักษาขอบเขตความหมายเดิมและไม่เพิ่มข้อกำหนดใหม่
+
+F — Format:
+1) Key Message 5 ข้อ
+2) What professionals should know
+3) What the public should know
+4) สิ่งที่ต้องให้ผู้เชี่ยวชาญตรวจสอบก่อนเผยแพร่
+5) ข้อมูลที่ยังไม่พอ / ต้องตรวจต้นฉบับเพิ่ม
+
+Guardrail:
+ใช้เฉพาะ Source Context; ถ้าไม่มีข้อมูลให้ระบุว่า “ข้อมูลไม่เพียงพอ”</textarea><div class="case-tools"><button class="combo-btn" data-copyboth="prompt-m01|context-m01">คัดลอก Prompt + Context</button><button class="reset-btn" data-reset="m01">คืนค่า Sample</button></div></section></div></article>
+<div class="group-label"><span class="pill">PUBLIC</span><h2>② Medical Content → Patient / Public Communication</h2></div>
+<article class="case-card"><div class="case-head"><div class="case-num">02</div><div class="case-title-wrap"><div class="case-kicker">PUBLIC COMMUNICATION</div><h3>👥 ภาษาวิชาชีพ → ภาษาประชาชนที่ยังคงความหมายเดิม</h3><div class="case-meta"><span class="mini framework">RTF + Audience</span><span class="mini data">Source-grounded</span></div></div></div><div class="two-col">
+<section class="panel context-panel"><div class="panel-title"><span>📎 CONTEXT</span><button class="copy-btn" data-copy="context-m02">คัดลอก Context</button></div><textarea class="editor" id="context-m02">สถานการณ์จำลอง: องค์กรวิชาชีพทางการแพทย์กำลังจัดทำชุดสื่อ “เช็กก่อนเชื่อข้อมูลสุขภาพออนไลน์” สำหรับประชาชนทั่วไป หลังพบว่ามีคำถามจำนวนมากเกี่ยวกับข้อมูลที่ AI ช่วยสร้าง
+
+SOURCE FACTS สำหรับกิจกรรมนี้:
+- ข้อมูลสุขภาพออนไลน์ที่มีคุณภาพควรระบุแหล่งอ้างอิงหรือที่มาที่ตรวจสอบย้อนกลับได้
+- ข้อมูลเพื่อการศึกษาทั่วไปไม่สามารถทดแทนการซักประวัติ ตรวจร่างกาย หรือ clinical judgment เฉพาะบุคคล
+- AI สามารถช่วยร่างหรือสรุปเนื้อหาได้ แต่เนื้อหาที่เผยแพร่ในนามองค์กรยังต้องมีผู้รับผิดชอบตรวจความถูกต้องและความเหมาะสม
+- หาก AI สร้างตัวเลข reference หรือ claim ที่ไม่พบใน source ไม่ควรนำไปใช้เพียงเพราะข้อความดูน่าเชื่อถือ
+- เมื่อข้อมูลไม่เพียงพอหรือเกี่ยวข้องกับอาการ/การรักษาเฉพาะบุคคล ควรระบุข้อจำกัดและแนะนำให้ปรึกษาผู้เชี่ยวชาญที่เหมาะสม
+- ข้อมูลผู้ป่วยหรือข้อมูลที่ทำให้ระบุตัวบุคคลได้ไม่ควรถูกนำมาใช้ในสื่อสาธารณะโดยไม่มีฐาน/สิทธิและกระบวนการที่เหมาะสม
+
+Audience:
+- ประชาชนวัยทำงานและครอบครัว
+- ผู้สูงอายุที่อาจอ่านข้อความผ่าน LINE หรือ Facebook
+- ผู้ดูแลผู้ป่วยที่ค้นข้อมูลสุขภาพออนไลน์ก่อนพาไปพบแพทย์
+- ระดับ health literacy ไม่เท่ากัน และบางคนไม่คุ้นศัพท์ AI / hallucination / governance
+
+Pain points ที่ทีมสื่อได้รับจาก feedback ก่อนหน้า:
+- “อ่านแล้วไม่รู้ว่าต้องทำอะไรต่อ”
+- “ศัพท์วิชาการเยอะ”
+- “ไม่รู้ว่าข้อมูลนี้เป็นคำแนะนำทั่วไปหรือใช้กับฉันได้เลย”
+- “อยากเห็นแหล่งอ้างอิงและวันที่อัปเดต”
+- “ถ้า AI ช่วยเขียน อยากรู้ว่ายังมีคนตรวจหรือไม่”
+
+Communication objective:
+ทำให้ประชาชนเข้าใจ 4 เรื่องหลังอ่านจบ:
+1) ข้อมูลสุขภาพออนไลน์ที่ดีควรตรวจสอบ source ได้
+2) ข้อมูลทั่วไปไม่เท่ากับคำแนะนำเฉพาะบุคคล
+3) AI ช่วยสร้างสื่อได้ แต่ยังต้องมีคนรับผิดชอบตรวจ
+4) หากข้อมูลไม่ชัดหรือเกี่ยวกับอาการเฉพาะบุคคล ควรปรึกษาผู้เชี่ยวชาญที่เหมาะสม
+
+Channel ที่จะนำไปใช้:
+- Facebook / LINE OA
+- Website summary
+- Infographic 1 หน้า
+
+Tone:
+- Professional but warm
+- ไม่ขู่ ไม่ตำหนิผู้ที่ใช้ AI
+- หลีกเลี่ยงภาษากฎหมายและศัพท์เทคนิค
+- ไม่ใช้คำว่า “AI อันตราย” แบบเหมารวม
+
+ข้อจำกัด:
+- ห้ามเพิ่ม clinical advice หรือ red-flag symptoms ที่ไม่มีใน source
+- ห้ามทำให้เข้าใจว่าองค์กรรับรอง AI platform ใดเป็นพิเศษ
+- ห้ามสร้างตัวเลขหรือสถิติใหม่</textarea></section>
+<section class="panel prompt-panel"><div class="panel-title"><span>💬 PROMPT — RTF</span><button class="copy-btn" data-copy="prompt-m02">คัดลอก Prompt</button></div><textarea class="editor" id="prompt-m02">R — Role:
+คุณเป็นนักสื่อสารสุขภาพสำหรับประชาชน
+
+T — Task:
+เรียบเรียง Source นี้ใหม่ให้ประชาชนทั่วไปเข้าใจง่าย โดยไม่ลดทอนสารสำคัญและไม่ทำให้ดูเป็นคำแนะนำเฉพาะบุคคล
+
+F — Format:
+- Headline 1 บรรทัด
+- Key Message 4 ข้อ
+- “คุณควรคาดหวังอะไรจากข้อมูลสุขภาพออนไลน์” 3 ข้อ
+- Call to Action 1 ข้อ
+- FAQ 3 คำถาม
+
+Style:
+ภาษาไทยธรรมชาติ กระชับ ไม่ใช้ศัพท์กฎหมายหรือวิชาการเกินจำเป็น</textarea><div class="case-tools"><button class="combo-btn" data-copyboth="prompt-m02|context-m02">คัดลอก Prompt + Context</button><button class="reset-btn" data-reset="m02">คืนค่า Sample</button></div></section></div></article>
+<div class="group-label"><span class="pill">MEDIA</span><h2>③ Issue → Media Q&amp;A</h2></div>
+<article class="case-card"><div class="case-head"><div class="case-num">03</div><div class="case-title-wrap"><div class="case-kicker">MEDIA RELATIONS</div><h3>🎙️ เตรียมคำถามยากก่อนออกสื่อ</h3><div class="case-meta"><span class="mini framework">RTF + Media</span><span class="mini level">Human review required</span></div></div></div><div class="two-col">
+<section class="panel context-panel"><div class="panel-title"><span>📎 CONTEXT — Issue จำลอง</span><button class="copy-btn" data-copy="context-m03">คัดลอก Context</button></div><textarea class="editor" id="context-m03">Issue จำลอง: “โพสต์ไวรัลอ้างว่าองค์กรวิชาชีพอนุญาตให้ใช้ AI เขียนข้อมูลสุขภาพได้โดยไม่ต้องมีคนตรวจ”
+
+Timeline:
+08.40 น. — ทีมสื่อพบ screenshot ที่ใส่โลโก้คล้ายองค์กร พร้อมข้อความว่า “ยุคใหม่แล้ว ให้ AI เขียนได้เลย ไม่ต้องมีแพทย์ตรวจทุกครั้ง”
+10.00 น. — Screenshot ถูกแชร์ต่อในหลายเพจ และมีคนถามว่า “แสดงว่าเว็บสุขภาพที่ AI เขียนเชื่อได้ทั้งหมดใช่ไหม?”
+11.15 น. — นักข่าว 2 สำนักขอสัมภาษณ์ spokesperson ภายในช่วงบ่าย
+
+ข้อเท็จจริงที่องค์กรยืนยันแล้วสำหรับ Issue นี้:
+- Policy brief ภายในระบุว่า AI ช่วยค้น สรุป ร่าง ปรับภาษา หรือสร้างสื่อได้
+- Policy brief ระบุชัดว่า Output จาก AI ไม่ถือว่าผ่านการรับรองโดยอัตโนมัติ
+- ผู้รับผิดชอบยังต้องตรวจ Accuracy, Source fidelity, Tone, Audience fit, Privacy และข้อจำกัดที่เกี่ยวข้องก่อนเผยแพร่
+- ประเด็นความเสี่ยงสูงควรมี expert review สูงกว่าปกติ
+- Human Accountability ยังอยู่กับคนและองค์กร
+
+สิ่งที่ “ยังไม่ยืนยัน”:
+- ใครสร้าง screenshot ต้นทาง
+- ผู้สร้างมีเจตนาบิดเบือนหรือเข้าใจผิด
+- Screenshot ถูกสร้างด้วย AI หรือแก้ไขด้วยวิธีอื่น
+- มีบุคลากรภายในแชร์ข้อมูลคลาดเคลื่อนหรือไม่
+
+Questions ที่นักข่าวแจ้งมาล่วงหน้า:
+1) องค์กรอนุญาตให้ AI เขียนบทความสุขภาพโดยไม่มีแพทย์ตรวจจริงหรือไม่?
+2) ถ้า AI เขียนผิด ใครต้องรับผิดชอบ?
+3) ประชาชนจะรู้ได้อย่างไรว่า content ไหนใช้ AI?
+4) จะมีการเอาผิดเพจที่ใช้ logo องค์กรหรือไม่?
+5) AI สามารถให้คำแนะนำรักษาโรคแทนแพทย์ได้หรือไม่?
+
+Communication objective:
+- แก้ความเข้าใจผิดโดยไม่ขยายประเด็นเกิน source
+- ตอกย้ำ Human Accountability
+- ไม่รีบกล่าวหาผู้สร้าง screenshot ก่อนตรวจสอบข้อเท็จจริง
+
+Guardrails:
+- หากคำถามเกิน Source ให้ระบุว่า “ยังไม่มีข้อมูลเพียงพอที่จะยืนยัน”
+- ห้ามสร้างมาตรการลงโทษ กฎหมาย หรือ policy ที่ source ไม่ได้ระบุ
+- ห้ามตอบคำถาม clinical specific ที่ไม่ได้อยู่ในบริบทนี้</textarea></section>
+<section class="panel prompt-panel"><div class="panel-title"><span>💬 PROMPT — RTF</span><button class="copy-btn" data-copy="prompt-m03">คัดลอก Prompt</button></div><textarea class="editor" id="prompt-m03">R — Role:
+คุณเป็นที่ปรึกษาด้าน Media Relations ขององค์กรวิชาชีพสุขภาพ
+
+T — Task:
+คาดการณ์คำถามที่นักข่าวอาจถามจาก Issue นี้ และร่างแนวคำตอบโดยใช้เฉพาะข้อเท็จจริงใน Context
+
+F — Format:
+ตาราง 10 ข้อ: คำถาม | แนวคำตอบ | Evidence/Source | ประเด็นที่ต้องระวัง
+เรียงจากคำถามทั่วไป → คำถามยาก/กดดัน
+
+Guardrail:
+ถ้าคำถามเกินสิ่งที่ Source ยืนยันได้ ให้ตอบว่า “ยังไม่มีข้อมูลเพียงพอที่จะยืนยัน” พร้อมเสนอ next step</textarea><div class="case-tools"><button class="combo-btn" data-copyboth="prompt-m03|context-m03">คัดลอก Prompt + Context</button><button class="reset-btn" data-reset="m03">คืนค่า Sample</button></div></section></div></article>
+<div class="group-label"><span class="pill">MANAGEMENT</span><h2>④ Source → Executive Brief / Action Items</h2></div>
+<article class="case-card"><div class="case-head"><div class="case-num">04</div><div class="case-title-wrap"><div class="case-kicker">EXECUTIVE BRIEF</div><h3>📄 เอกสารทางการ → สิ่งที่ผู้บริหารต้องรู้และต้องทำ</h3><div class="case-meta"><span class="mini framework">RTF + Executive</span></div></div></div><div class="two-col">
+<section class="panel context-panel"><div class="panel-title"><span>📎 CONTEXT</span><button class="copy-btn" data-copy="context-m04">คัดลอก Context</button></div><textarea class="editor" id="context-m04">สถานการณ์จำลอง: ผู้บริหารต้องการเปลี่ยน “หลักการสื่อสาร AI อย่างรับผิดชอบ” ให้เป็นการปรับ Workflow จริงขององค์กรภายใน 60 วัน
+
+Current-state workflow ที่ทีมรายงาน:
+1) ทีมวิชาการส่งเอกสารต้นทางผ่าน email หรือ shared drive
+2) ทีมสื่อเลือกประเด็นและร่าง content ใน Word / Google Docs
+3) บางคนใช้ AI ส่วนตัวช่วยสรุปหรือ rewrite แต่ยังไม่มีแนวปฏิบัติร่วม
+4) draft ส่งกลับให้แพทย์ reviewer ผ่าน email
+5) หากเป็นเรื่อง sensitive อาจส่ง legal/PDPA เพิ่ม แต่ไม่มี trigger checklist ที่ชัด
+6) final copy ถูกส่งให้ graphic designer หรือ social team ทำรูป/โพสต์
+7) ผู้บริหาร approve เฉพาะบางเรื่อง ขึ้นกับดุลยพินิจทีม
+8) หลังเผยแพร่ หากต้องแก้ไข มักแก้ใน channel นั้น ๆ แต่ไม่มี correction log กลาง
+
+Pain points:
+- ใช้เวลาหา source version ล่าสุด
+- reviewer ไม่รู้ว่าจุดไหน AI สร้างหรือสรุปมา
+- ไม่มีมาตรฐานเรื่อง citation / last updated / reviewer metadata
+- ไม่มี data classification ที่ทีมสื่อจำง่าย
+- Public AI และ Enterprise AI ถูกใช้งานปะปนกัน
+- ไม่มีช่องทางกลางแจ้ง deepfake / logo misuse / misinformation ที่แอบอ้างองค์กร
+
+ข้อกำหนดหลักจาก Policy Brief จำลองที่ผู้บริหารได้รับ:
+- ต้องมี source traceability
+- ต้องแยกข้อมูลทั่วไปออกจากคำแนะนำเฉพาะบุคคล
+- ต้องคุม privacy/confidentiality
+- AI output ต้องผ่าน human review
+- high-risk communication ต้องเพิ่ม expert review
+- ต้องมีกระบวนการ correction/update
+- ต้องมี owner และ human accountability
+
+สิ่งที่ Source “ไม่ได้กำหนด”:
+- ใครเป็น owner ในองค์กรนี้
+- ใช้ AI platform/model ใด
+- SLA การ review กี่ชั่วโมง
+- content ประเภทไหนผู้บริหารต้อง approve
+- ระบบ document management ใดเป็น source of truth
+
+ข้อจำกัดในการทำแผน:
+- อย่าสร้าง SOP final ให้เหมือนผ่านการอนุมัติแล้ว
+- ให้เสนอ Quick Win / Design Question / Pilot ได้ แต่จุดที่ต้องมีการตัดสินใจขององค์กรต้องแยกชัด
+- เป้าหมายคือ Executive Brief เพื่อช่วยผู้บริหารตั้งคำถามและกำหนด owner ไม่ใช่ให้ AI ออก policy แทน</textarea></section>
+<section class="panel prompt-panel"><div class="panel-title"><span>💬 PROMPT — RTF</span><button class="copy-btn" data-copy="prompt-m04">คัดลอก Prompt</button></div><textarea class="editor" id="prompt-m04">R — Role:
+คุณเป็น Executive Policy Briefing Assistant
+
+T — Task:
+สรุป Source นี้สำหรับผู้บริหาร และแยกสิ่งที่ “Source บอกชัด” ออกจากสิ่งที่องค์กร “ต้องไปออกแบบต่อเอง”
+
+F — Format:
+1) Executive Summary 6 bullet
+2) Implications for Communication Workflow
+3) สิ่งที่ควรมี Owner / Reviewer
+4) Questions ที่ต้องตอบก่อนแก้ SOP
+5) Quick Wins 3 ข้อ
+6) Decisions to defer เพราะข้อมูล SOP ปัจจุบันยังไม่พอ</textarea><div class="case-tools"><button class="combo-btn" data-copyboth="prompt-m04|context-m04">คัดลอก Prompt + Context</button><button class="reset-btn" data-reset="m04">คืนค่า Sample</button></div></section></div></article>
+<div class="group-label"><span class="pill">VISUAL</span><h2>⑤ Key Message → Visual Brief โดยใช้ Identity ที่สร้างไว้</h2></div>
+<article class="case-card"><div class="case-head"><div class="case-num">05</div><div class="case-title-wrap"><div class="case-kicker">VISUAL COMMUNICATION</div><h3>🎨 ใช้ Character Identity เดิม + Source ที่ตรวจแล้ว → ภาพที่สม่ำเสมอ</h3><div class="case-meta"><span class="mini framework">Identity + Visual Prompt</span><span class="mini level">Reuse your character</span></div></div></div><div class="two-col">
+<section class="panel context-panel"><div class="panel-title"><span>📎 CONTEXT</span><button class="copy-btn" data-copy="context-m05">คัดลอก Context</button></div><textarea class="editor" id="context-m05">โครงการจำลอง: Hero Visual สำหรับ Campaign ภายในองค์กร “AI ช่วยร่าง — คนยังต้องตรวจ”
+
+Key Message ที่ทีมวิชาการและสื่อ “ตรวจแล้ว”:
+“AI ช่วยร่าง สรุป และสร้างสื่อสุขภาพได้ แต่ผู้รับผิดชอบยังต้องตรวจความถูกต้อง แหล่งข้อมูล ความเหมาะสมต่อผู้รับสาร และบริบทก่อนเผยแพร่”
+
+Communication objective:
+- ทำให้ผู้บริหารและบุคลากรเข้าใจ Human in the Loop ภายใน 3–5 วินาที
+- สื่อว่า AI เป็นผู้ช่วย ไม่ใช่ผู้รับผิดชอบแทนมนุษย์
+- ภาพต้องสามารถนำไปใช้ต่อใน slide, internal social post และ workshop handout
+
+Audience:
+- ผู้บริหารโรงพยาบาล / คณะแพทยศาสตร์ / องค์กรวิชาชีพ
+- แพทย์และบุคลากรสุขภาพ
+- ทีมสื่อสารองค์กรและ digital team
+
+Visual Identity:
+[วาง Character Bible / Identity Prompt ที่สร้างจากหน้า ① หรือแนบภาพ character ที่สร้างไว้เป็น reference]
+
+Brand / Mood:
+- Professional, calm, trustworthy, premium healthcare-tech
+- Navy / Teal / White + subtle gold accent
+- ไม่ใช้ภาพที่ดู futuristic จนเกินบริบทองค์กรแพทย์
+
+Scene idea:
+- Character executive คนเดิมยืนด้านขวา กำลังตรวจ draft บน tablet
+- ด้านหลังมี source document / check mark / review workflow แบบ abstract
+- ไม่แสดงข้อมูลคนไข้จริง ไม่แสดงชื่อยา ไม่แสดง chart ที่อ้างผลรักษา
+- เหลือ negative space ด้านซ้ายประมาณ 35–40% สำหรับ headline และ key message
+
+Deliverables:
+1) Hero visual 16:9 สำหรับ slide
+2) Crop-safe composition ที่ตัดเป็น 4:5 ได้โดย character ไม่หาย
+3) ไม่มีข้อความยาวที่ AI ต้อง render บนภาพ — ข้อความจะวางใน slide ภายหลัง
+
+Visual Safety:
+- ห้ามสร้าง logo จริงหรือเอกสารทางการปลอม
+- ห้ามทำให้ character ดูเหมือนกำลังอนุมัติ clinical decision ให้ผู้ป่วยเฉพาะราย
+- หากใช้หน้าจอ tablet ให้เป็น abstract interface ไม่มี PHI/PII
+- รักษา character identity เดิมอย่างเคร่งครัด เพื่อให้ campaign ต่อ ๆ ไปมี visual consistency</textarea></section>
+<section class="panel prompt-panel"><div class="panel-title"><span>💬 PROMPT — VISUAL BRIEF</span><button class="copy-btn" data-copy="prompt-m05">คัดลอก Prompt</button></div><textarea class="editor" id="prompt-m05">ใช้ character identity เดิมเป็นตัวละครหลักอย่างเคร่งครัด
+
+สร้าง Hero Visual 16:9 สำหรับหัวข้อ “AI ช่วยร่าง — คนยังต้องตรวจ”
+- Character: ผู้บริหาร/medical communication executive คนเดิมจาก reference
+- Pose: กำลังตรวจ draft บน tablet และชี้ไปที่ check mark / source document
+- Setting: modern healthcare communication room
+- Mood: trustworthy, calm, professional, premium healthcare-tech
+- Brand colors: navy, teal, white, subtle gold
+- Composition: character อยู่ด้านขวา เหลือ negative space ด้านซ้ายสำหรับ headline
+
+Safety:
+ไม่ใส่ข้อมูลผู้ป่วย ไม่สร้าง medical claim ไม่สร้างโลโก้/ข้อความยาวที่อ่านเหมือนเอกสารจริง</textarea><div class="case-tools"><button class="combo-btn" data-copyboth="prompt-m05|context-m05">คัดลอก Prompt + Context</button><button class="reset-btn" data-reset="m05">คืนค่า Sample</button></div></section></div></article>
+<div class="quicklib"><h2>⚡ Verify Before Publish</h2>
+<code>ช่วย Audit เนื้อหานี้เป็นตาราง: Claim | อยู่ใน Context/Source ของ Case นี้หรือไม่ | Source Fact / Interpretation | Risk | Safer wording</code>
+<code>ก่อนตอบรอบใหม่ ให้ระบุข้อความใดในคำตอบของคุณ “ไม่ได้อยู่ใน Context” ถ้ามี ให้ลบหรือย้ายไป Hypothesis</code>
+<code>ช่วยทำ Consistency Check: Executive Brief | Public Post | Media Q&amp;A | Visual Brief มีสารหลักตรงกันหรือไม่ และตรงไหนเสี่ยงตีความเกิน Source</code></div>
+</section>
+<section class="app-page" id="page-game">
+<div class="page-intro">
+<span class="page-kicker">PAGE 3 · AI PROTOTYPE PLAYGROUND</span>
+<h2>จาก “AI ตอบข้อความ” → สู่ “AI สร้างของที่เล่นได้”</h2>
+<p>ส่วนนี้ไม่สอนเขียนเกมและไม่มี Prompt เพิ่มเติม จุดประสงค์คือให้ผู้เรียนเล่นจริง แล้วเห็นว่า Generative AI สามารถช่วยสร้าง Interactive Prototype ที่มี UI, Logic, Score, Mobile Control, Sound และ Interaction ได้</p>
+<div class="prototype-chips"><span>UI</span><span>Logic</span><span>Game Rules</span><span>Scoring</span><span>Touch Control</span><span>Sound</span><span>Restart</span></div>
+<div class="game-note"><strong>สังเกตระหว่างเล่น:</strong> สิ่งนี้ไม่ได้เป็น “ข้อความตอบกลับ” แต่เป็น software prototype ที่มี state, rules และ interaction — และยังต้อง Human Test ก่อนใช้จริงเสมอ</div>
+</div>
+<div class="section-title">🎮 Pharma Quest — เล่นได้เลย</div><div class="rule"></div>
+<div class="game-wrap">
+<iframe allow="fullscreen" allowfullscreen="" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;th&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;
+&lt;meta name=&quot;theme-color&quot; content=&quot;#0b2023&quot;&gt;
+&lt;title&gt;Pharma Quest — เภสัชกรตะลุยเชื้อโรค&lt;/title&gt;
+&lt;style&gt;
+:root{color-scheme:dark;--mint:#a9f7cf;--ink:#102c2b}*{box-sizing:border-box}body{margin:0;background:#0b2023;color:#e9f6ed;font:15px system-ui,-apple-system,'Tahoma',sans-serif;min-height:100dvh;background-image:radial-gradient(ellipse at 50% 0,#204d49 0,transparent 65%)}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #ffdc7b;outline-offset:4px}.page{max-width:1080px;margin:auto;padding:30px 30px 20px}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:23px;gap:14px}.brand{display:flex;align-items:center;gap:12px}.brandmark{width:39px;height:39px;background:var(--mint);color:var(--ink);font-size:30px;line-height:36px;text-align:center;border-radius:11px;font-weight:900}h1{font-size:21px;margin:0;letter-spacing:2px}.sub{color:#98b9b3;font-size:12px;margin-top:3px}.tag{font:11px monospace;letter-spacing:1.5px;color:#bce9d4;border:1px solid #3e635b;border-radius:30px;padding:9px 13px}.frame{border:1px solid #527068;border-radius:18px;overflow:hidden;box-shadow:0 30px 80px #0005;background:#162f32}.toolbar{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#163532;gap:10px}.level{font-size:12px;letter-spacing:1px;color:#afd4c5}.toolbar button{border:0;border-radius:8px;color:#d8efe5;background:#294d46;padding:7px 11px;font-size:12px}.toolbar button:hover{background:#3d665d}.tools{display:flex;gap:7px}.stage{position:relative;aspect-ratio:16/9;background:#c8eee2}canvas{display:block;width:100%;height:100%;image-rendering:pixelated;touch-action:none}.overlay{position:absolute;inset:0;background:#0b333950;backdrop-filter:blur(3px);display:grid;place-items:center;padding:14px}.overlay.hidden{display:none}.card{text-align:center;width:min(470px,95%);background:#123c36f5;border:1px solid #b4f0c66b;border-radius:20px;padding:30px 30px 26px;box-shadow:0 15px 55px #0a302950}.eyebrow{font:11px monospace;letter-spacing:3px;color:#b9efca}.card h2{font-size:clamp(24px,4vw,42px);line-height:1.1;letter-spacing:-1px;margin:12px 0;color:#f7f8df}.card p{line-height:1.8;color:#bfdbd0;margin:12px 0 18px;font-size:14px}.primary{background:#bafa88;border:0;border-radius:10px;color:#173b28;font-weight:800;padding:13px 29px;box-shadow:0 4px 0 #608c45}.primary:hover{background:#d4ffb4}.card .mini{font-size:11px;margin:16px 0 0;color:#87afa1}.legend{display:flex;gap:20px;justify-content:center;padding:17px 10px;color:#b6d1c7;font-size:12px;flex-wrap:wrap}.legend b{color:#f3f1d5}.dot{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px;background:#ffd874}.dot.pink{background:#ff859b}.dot.green{background:#a9ee71}.bottom{display:flex;justify-content:space-between;gap:15px;margin-top:19px;color:#8aaca5;font-size:12px;align-items:center}.keys{display:flex;align-items:center;gap:7px;flex-wrap:wrap}kbd{display:inline-block;min-width:24px;border:1px solid #3d605b;border-bottom:3px solid #3d605b;border-radius:5px;padding:3px 7px;color:#d5e8dd;font:11px monospace}.touch{display:flex;justify-content:space-between;gap:20px;padding:0 2px;margin-top:17px;user-select:none;-webkit-user-select:none}.pad{display:flex;gap:10px}.touch button{touch-action:none;border:1px solid #56796b;border-bottom:4px solid #496657;background:#234b42;color:#e7f9e7;border-radius:14px;min-width:64px;height:56px;font-size:23px}.touch .jump{background:#bafa88;color:#244232;border-color:#638942;font-size:14px;font-weight:bold;min-width:120px}.touch button.held{transform:translateY(2px);filter:brightness(1.3)}footer{font-size:10px;color:#73958c;text-align:center;margin-top:20px;line-height:1.6}@media(max-width:650px){.page{padding:16px 10px}.tag{display:none}header{margin-bottom:15px}h1{font-size:17px}.sub{font-size:10px}.toolbar{padding:9px}.level{font-size:10px}.toolbar button{font-size:11px;padding:6px 8px}.card{padding:15px}.card p{font-size:11px;line-height:1.5;margin:8px 0}.card h2{margin:7px 0}.card .mini{display:none}.primary{padding:9px 20px}.eyebrow{font-size:9px}.legend{gap:10px;font-size:10px;padding:12px 5px}.bottom{flex-direction:column;align-items:flex-start;gap:8px}.touch button{min-width:65px;height:58px}}/* Mobile controls stay outside the playfield, with room for display cutouts. */
+html{overscroll-behavior:none}button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}.touch{touch-action:none;-webkit-touch-callout:none}.touch button{user-select:none;-webkit-user-select:none}.mobile-help{display:none;text-align:center;color:#afd4c5;font-size:12px;line-height:1.6;margin:10px 0}.stage{aspect-ratio:var(--game-ratio,16/9);max-height:none;flex-shrink:0}.overlay{overflow-y:auto;overscroll-behavior:contain}.card{margin:auto}.tools{flex-wrap:wrap}.toolbar button{min-height:40px}.page{padding-bottom:max(20px,env(safe-area-inset-bottom))}
+@media(max-width:650px) and (orientation:portrait){
+.page{padding:12px max(10px,env(safe-area-inset-left)) max(16px,env(safe-area-inset-bottom))}.toolbar{flex-wrap:wrap;justify-content:center;gap:5px}.level{display:none}.tools{justify-content:center;width:100%}.tools button{flex:1;padding:8px 5px;white-space:nowrap}.stage{aspect-ratio:32/27}.mobile-help{display:block}.touch{margin-top:12px;gap:10px}.touch button{min-width:72px;height:72px;font-size:26px}.touch .jump{min-width:115px;font-size:16px}.pad{gap:8px}.bottom .keys{display:none}.bottom{margin-top:10px;align-items:center}.card{padding:17px 12px}.card h2{font-size:29px}.card p{font-size:12px}.primary{min-height:44px}.eyebrow{letter-spacing:1px;font-size:9px}.legend{line-height:1.6}}
+body.immersive{overflow:hidden}body.immersive .page{position:fixed;inset:0;z-index:20;max-width:none;margin:0;background:#0b2023;overflow-y:auto;padding: max(6px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}body.immersive header,body.immersive .legend,body.immersive .bottom,body.immersive footer{display:none}body.immersive .frame{flex-shrink:0;width:min(100%,calc((100dvh - 160px - env(safe-area-inset-top) - env(safe-area-inset-bottom))*16/9))}body.immersive .touch{width:min(100%,900px);margin:0;flex-shrink:0}body.immersive .toolbar{padding:4px 8px}body.immersive .mobile-help{margin:0}
+@media(orientation:portrait){body.immersive .frame{width:min(100%,calc((100dvh - 205px - env(safe-area-inset-top) - env(safe-area-inset-bottom))*32/27))}body.immersive .mobile-help{display:block}}
+@media(max-height:550px) and (orientation:landscape){
+.page,body.immersive .page{max-width:none;min-height:100dvh;padding:max(4px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}header,.legend,.bottom,footer,.mobile-help,body.immersive .mobile-help{display:none}.frame,body.immersive .frame{width:min(100%,calc((100dvh - 126px - env(safe-area-inset-top) - env(safe-area-inset-bottom))*16/9));flex-shrink:0}.toolbar{padding:3px 6px;justify-content:center;gap:4px}.level{display:none}.toolbar button{min-height:36px;font-size:11px;padding:5px 9px}.stage{width:100%;margin:0;aspect-ratio:16/9}.touch,body.immersive .touch{position:static;width:min(100%,900px);margin:0;pointer-events:auto;flex-shrink:0}.touch button{min-width:78px;height:62px;opacity:1}.touch .jump{min-width:132px}.overlay{padding:6px}.card{padding:10px 14px;max-width:430px;border-radius:12px}.card h2{font-size:24px;margin:4px 0}.card h2 br{display:none}.card p{font-size:11px;line-height:1.4;margin:5px 0}.card .mini,.eyebrow{display:none}.primary{padding:6px 18px;min-height:36px;font-size:12px}}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;main class=&quot;page&quot;&gt;
+&lt;header&gt;&lt;div class=&quot;brand&quot;&gt;&lt;div class=&quot;brandmark&quot;&gt;✚&lt;/div&gt;&lt;div&gt;&lt;h1&gt;PHARMA QUEST&lt;/h1&gt;&lt;div class=&quot;sub&quot;&gt;เภสัชกรตัวจิ๋ว กับภารกิจกู้เมืองสุขภาพ&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;tag&quot;&gt;ONE WORLD. ONE LITTLE HERO.&lt;/div&gt;&lt;/header&gt;
+&lt;section class=&quot;frame&quot; aria-label=&quot;เกมเภสัชกรตะลุยเชื้อโรค&quot;&gt;
+&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;level&quot;&gt;01 / GREEN CROSS VALLEY&lt;/div&gt;&lt;div class=&quot;tools&quot;&gt;&lt;button id=&quot;sound&quot; aria-label=&quot;เปิดเสียง&quot; aria-pressed=&quot;false&quot;&gt;เสียง: ปิด&lt;/button&gt;&lt;button id=&quot;expand&quot; aria-pressed=&quot;false&quot;&gt;ขยายจอ ⛶&lt;/button&gt;&lt;button id=&quot;pause&quot;&gt;พักเกม&lt;/button&gt;&lt;button id=&quot;restart&quot;&gt;เริ่มใหม่ ↻&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;stage&quot;&gt;&lt;canvas id=&quot;game&quot; width=&quot;960&quot; height=&quot;540&quot; role=&quot;img&quot; aria-label=&quot;เกมแพลตฟอร์ม ใช้ลูกศรซ้ายขวาเพื่อเดิน Space เพื่อกระโดด เก็บยาและไปยังร้านยาสุดด่าน&quot;&gt;&lt;/canvas&gt;&lt;div id=&quot;overlay&quot; class=&quot;overlay&quot;&gt;&lt;div class=&quot;card&quot;&gt;&lt;div class=&quot;eyebrow&quot; id=&quot;eyebrow&quot;&gt;A TINY PHARMACIST ADVENTURE&lt;/div&gt;&lt;h2 id=&quot;title&quot;&gt;เภสัชกร&lt;br&gt;ตะลุยเชื้อโรค!&lt;/h2&gt;&lt;p id=&quot;message&quot;&gt;กระโดดเหยียบเชื้อโรค • ชนกล่อง ✚ เพื่อรับยา&lt;br&gt;เก็บยาเพิ่มเกราะ แล้วไปถึงร้านยาสุดด่าน&lt;/p&gt;&lt;button id=&quot;action&quot; class=&quot;primary&quot;&gt;เริ่มภารกิจ →&lt;/button&gt;&lt;p class=&quot;mini&quot;&gt;← → เดิน &amp;nbsp; SPACE กระโดด &amp;nbsp; / &amp;nbsp; ใช้ปุ่มสัมผัสได้&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;legend&quot;&gt;&lt;span&gt;&lt;i class=&quot;dot&quot;&gt;&lt;/i&gt;&lt;b&gt;วิตามิน&lt;/b&gt; +10 คะแนน&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;dot pink&quot;&gt;&lt;/i&gt;&lt;b&gt;แคปซูลยา&lt;/b&gt; เกราะป้องกัน 1 ครั้ง&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;dot green&quot;&gt;&lt;/i&gt;&lt;b&gt;เชื้อโรค&lt;/b&gt; กระโดดเหยียบเพื่อกำจัด&lt;/span&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;p class=&quot;mobile-help&quot;&gt;ใช้สองนิ้ว: กด ◀ ▶ ค้างไว้ แล้วแตะกระโดด&lt;br&gt;กดกระโดดค้างเพื่อกระโดดไกล · หมุนแนวนอนเพื่อเห็นทางมากขึ้น&lt;/p&gt;
+&lt;div class=&quot;touch&quot; aria-label=&quot;ปุ่มควบคุมบนจอ&quot;&gt;&lt;div class=&quot;pad&quot;&gt;&lt;button data-key=&quot;left&quot; aria-label=&quot;เดินซ้าย&quot;&gt;◀&lt;/button&gt;&lt;button data-key=&quot;right&quot; aria-label=&quot;เดินขวา&quot;&gt;▶&lt;/button&gt;&lt;/div&gt;&lt;button class=&quot;jump&quot; data-key=&quot;jump&quot; aria-label=&quot;กระโดด&quot;&gt;กระโดด ↑&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;bottom&quot;&gt;&lt;div class=&quot;keys&quot;&gt;&lt;kbd&gt;←&lt;/kbd&gt;&lt;kbd&gt;→&lt;/kbd&gt; เดิน &lt;kbd&gt;Space&lt;/kbd&gt; กระโดด &lt;kbd&gt;P&lt;/kbd&gt; พัก &lt;kbd&gt;R&lt;/kbd&gt; เริ่มใหม่&lt;/div&gt;&lt;span&gt;ฉากเดียว · 3 ชีวิต · มีจุดเซฟกลางทาง&lt;/span&gt;&lt;/div&gt;
+&lt;footer&gt;เกมแฟนตาซีเพื่อความสนุก — ยาในเกมเป็นไอเทมสมมติ ไม่ใช่คำแนะนำการใช้ยา&lt;/footer&gt;
+&lt;/main&gt;
+&lt;script&gt;
+'use strict';
+(()=&gt;{
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
+let W=960;const H=540,END=4340,G=1550,SPEED=265,JUMP=620;
+const ui={overlay:document.getElementById('overlay'),title:document.getElementById('title'),message:document.getElementById('message'),action:document.getElementById('action'),eyebrow:document.getElementById('eyebrow'),pause:document.getElementById('pause')};
+let state='ready',player,solids,enemies,coins,meds,particles,labels,score,lives,camera,checkpoint,time,frame=0,buffer=0,coyote=0,shake=0,medCount=0,killCount=0;
+const heldPointers=new Map(),heldKeyboard=new Set();
+const keys={left:false,right:false,jump:false};let muted=true,audioCtx;
+function sound(type){if(muted)return;try{audioCtx??=new(window.AudioContext||window.webkitAudioContext)();audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);const n=audioCtx.currentTime;const f={jump:390,coin:950,medicine:590,stomp:190,hurt:100,win:780,block:290,save:660}[type]||400;o.type='square';o.frequency.setValueAtTime(f,n);o.frequency.exponentialRampToValueAtTime(type==='hurt'?45:f*1.7,n+.14);g.gain.setValueAtTime(.035,n);g.gain.exponentialRampToValueAtTime(.001,n+.18);o.start(n);o.stop(n+.2)}catch(e){}}
+function reset(){score=0;lives=3;camera=0;checkpoint=false;time=0;medCount=0;killCount=0;shake=0;buffer=0;coyote=0;
+solids=[{x:0,y:460,w:1080,h:100,type:'ground'},{x:1210,y:460,w:910,h:100,type:'ground'},{x:2270,y:460,w:910,h:100,type:'ground'},{x:3310,y:460,w:1030,h:100,type:'ground'}];
+[[440,350,'brick'],[484,350,'med'],[528,350,'brick'],[750,300,'coin'],[1360,354,'brick'],[1404,354,'med'],[1448,354,'brick'],[1510,265,'coin'],[1960,350,'coin'],[2400,350,'brick'],[2444,350,'med'],[2488,350,'brick'],[2650,280,'coin'],[2900,350,'med']].forEach(([x,y,type])=&gt;solids.push({x,y,w:44,h:44,type,used:false,bump:0}));
+[[1680,405,90,55],[1770,350,90,110],[1860,405,90,55],[3460,405,62,55],[3522,350,62,110],[3584,295,62,165],[3646,350,62,110],[3708,405,62,55]].forEach(([x,y,w,h])=&gt;solids.push({x,y,w,h,type:'step'}));
+coins=[];[[245,409],[320,409],[455,301],[499,301],[543,301],[770,247],[955,386],[1128,323],[1290,399],[1390,302],[1450,302],[1540,214],[1790,295],[1985,300],[2177,322],[2370,411],[2466,300],[2540,300],[2670,231],[2930,299],[3090,394],[3240,319],[3550,295],[3615,240],[3675,295],[3850,402],[3930,402]].forEach(([x,y])=&gt;coins.push({x,y,w:21,h:25,got:false}));
+enemies=[[650,510,920,48,'green'],[960,840,1050,-42,'pink'],[1560,1260,1640,-55,'green'],[2030,1960,2080,45,'pink'],[2580,2350,2740,-58,'green'],[2850,2710,3020,61,'pink'],[3040,2910,3140,-45,'green'],[3880,3800,3990,-58,'pink']].map(([x,min,max,v,type])=&gt;({x,y:426,w:34,h:34,min,max,v,type,dead:false}));
+meds=[{x:825,y:414,w:28,h:24,vx:36,vy:0,got:false}];particles=[];labels=[];spawn();release();}
+function spawn(){player={x:checkpoint?2310:85,y:390,w:30,h:53,vx:0,vy:0,ground:false,shield:false,inv:1.2,dir:1,walk:0};buffer=0;coyote=0;}
+function release(){heldPointers.clear();heldKeyboard.clear();keys.left=keys.right=keys.jump=false;document.querySelectorAll('.held').forEach(e=&gt;e.classList.remove('held'))}
+function show(kind){state=kind;release();ui.overlay.classList.remove('hidden');ui.pause.textContent='พักเกม';if(kind==='paused'){ui.eyebrow.textContent='TAKE A LITTLE BREATHER';ui.title.textContent='พักเติมพลัง';ui.message.textContent='พร้อมแล้วกลับไปช่วยเมืองสุขภาพกันต่อ';ui.action.textContent='เล่นต่อ →';ui.pause.textContent='เล่นต่อ'}else if(kind==='won'){ui.eyebrow.textContent='MISSION COMPLETE';ui.title.textContent='เมืองปลอดภัยแล้ว!';ui.message.innerHTML=`คะแนน ${score.toLocaleString()} · เก็บยา ${medCount} ชิ้น&lt;br&gt;กำจัดเชื้อโรค ${killCount} ตัว · เวลา ${Math.floor(time)} วินาที`;ui.action.textContent='ผจญภัยอีกครั้ง ↻';sound('win')}else if(kind==='over'){ui.eyebrow.textContent='EVERY HERO TRIES AGAIN';ui.title.textContent='ลองใหม่อีกครั้ง!';ui.message.innerHTML=`ทำได้ ${score.toLocaleString()} คะแนนแล้ว&lt;br&gt;ลองกระโดดเหยียบเชื้อโรค และเก็บยาช่วยป้องกันตัว`;ui.action.textContent='เริ่มใหม่ ↻'}}
+function play(){if(state!=='paused')reset();state='playing';ui.overlay.classList.add('hidden');ui.pause.textContent='พักเกม';last=performance.now()}
+function pause(){if(state==='playing')show('paused');else if(state==='paused')play()}
+function overlap(a,b){return a.x&lt;b.x+b.w&amp;&amp;a.x+a.w&gt;b.x&amp;&amp;a.y&lt;b.y+b.h&amp;&amp;a.y+a.h&gt;b.y}
+function burst(x,y,color,n=10){for(let i=0;i&lt;n;i++)particles.push({x,y,vx:(Math.random()-.5)*240,vy:-Math.random()*230-50,t:.65,c:color})}
+function label(x,y,txt,c='#214f3b'){labels.push({x,y,txt,c,t:1})}
+function hurt(fall=false){if(!fall&amp;&amp;player.inv&gt;0)return;if(!fall&amp;&amp;player.shield){player.shield=false;player.inv=2;shake=.2;sound('hurt');burst(player.x+15,player.y+24,'#fff8bb');return}lives--;sound('hurt');shake=.25;if(lives&lt;=0){show('over');return}spawn();camera=Math.max(0,player.x-180);label(player.x,player.y-20,'เหลือ '+lives+' ชีวิต');}
+function hitBlock(s){s.bump=.17;sound('block');if(s.used||s.type==='ground'||s.type==='step')return;if(s.type==='med'){s.used=true;meds.push({x:s.x+8,y:s.y-27,w:28,h:24,vx:65,vy:-125,got:false});burst(s.x+22,s.y,'#ffb3c0',5)}else if(s.type==='coin'){s.used=true;score+=30;burst(s.x+22,s.y,'#ffc85a');label(s.x,s.y-15,'+30');sound('coin')}}
+function moveBody(b,dt,head=false){b.x+=b.vx*dt;for(const s of solids)if(overlap(b,s)){if(b.vx&gt;0)b.x=s.x-b.w;else if(b.vx&lt;0)b.x=s.x+s.w;if(head)b.vx=0;else b.vx*=-1}b.vy+=G*dt;b.y+=b.vy*dt;b.ground=false;for(const s of solids)if(overlap(b,s)){if(b.vy&gt;=0){b.y=s.y-b.h;b.ground=true}else{b.y=s.y+s.h;if(head)hitBlock(s)}b.vy=0}}
+function update(dt){frame+=dt;if(state!=='playing')return;time+=dt;shake=Math.max(0,shake-dt);player.inv=Math.max(0,player.inv-dt);coyote=player.ground?.10:Math.max(0,coyote-dt);buffer=Math.max(0,buffer-dt);const target=(Number(keys.right)-Number(keys.left))*SPEED;player.vx+=(target-player.vx)*Math.min(1,dt*15);if(Math.abs(player.vx)&gt;15)player.dir=Math.sign(player.vx);if(buffer&gt;0&amp;&amp;coyote&gt;0){player.vy=-JUMP;player.ground=false;coyote=0;buffer=0;sound('jump')}if(!keys.jump&amp;&amp;player.vy&lt;-245)player.vy+=G*dt*.95;const oldY=player.y;moveBody(player,dt,true);player.x=Math.max(0,Math.min(END-player.w,player.x));player.walk+=Math.abs(player.vx)*dt*.07;
+if(player.y&gt;H+100){hurt(true);if(state!=='playing')return}
+for(const c of coins)if(!c.got&amp;&amp;overlap(player,c)){c.got=true;score+=10;sound('coin');burst(c.x+10,c.y+10,'#ffdc80',6)}
+for(const m of meds)if(!m.got){moveBody(m,dt);if(m.y&gt;650){m.got=true;continue}if(overlap(player,m)){m.got=true;player.shield=true;player.inv=.6;medCount++;score+=50;sound('medicine');burst(m.x,m.y,'#ff93a5',16);label(player.x,player.y-18,'เกราะยา +50')}}
+for(const e of enemies)if(!e.dead){e.x+=e.v*dt;if(e.x&lt;e.min){e.x=e.min;e.v=Math.abs(e.v)}if(e.x&gt;e.max){e.x=e.max;e.v=-Math.abs(e.v)}if(overlap(player,e)){if(player.vy&gt;40&amp;&amp;oldY+player.h&lt;=e.y+13){e.dead=true;player.vy=-400;score+=100;killCount++;sound('stomp');burst(e.x+17,e.y+17,e.type==='pink'?'#d78bd2':'#93b94c',14);label(e.x,e.y-10,'+100')}else hurt();if(state!=='playing')break}}
+if(!checkpoint&amp;&amp;player.x&gt;2290){checkpoint=true;sound('save');label(2330,345,'จุดเซฟแล้ว!','#276359');burst(2315,352,'#f9f2a4',20)}
+if(player.x&gt;4110&amp;&amp;state==='playing'){score+=lives*100;show('won');for(let i=0;i&lt;80;i++)particles.push({x:camera+Math.random()*W,y:Math.random()*200,vx:(Math.random()-.5)*100,vy:60+Math.random()*140,t:3,c:['#e6ef8f','#ff8ca4','#a4e4de'][i%3]})}
+camera+=((Math.max(0,Math.min(END-W,player.x-W*.32)))-camera)*Math.min(1,dt*6);
+for(const s of solids)s.bump=Math.max(0,(s.bump||0)-dt);
+for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=500*dt;p.t-=dt}particles=particles.filter(p=&gt;p.t&gt;0);
+for(const l of labels){l.y-=28*dt;l.t-=dt}labels=labels.filter(l=&gt;l.t&gt;0);
+}
+function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
+function round(x,y,w,h,r,c){ctx.fillStyle=c;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
+function text(t,x,y,size=16,c='#244c3e',align='left',font='monospace'){ctx.fillStyle=c;ctx.font=`bold ${size}px ${font}`;ctx.textAlign=align;ctx.fillText(t,x,y)}
+function cloud(x,y,s=1){ctx.save();ctx.translate(x,y);ctx.scale(s,s);rect(0,18,110,24,'#eff8e9');rect(18,4,35,42,'#eff8e9');rect(50,0,38,45,'#eff8e9');rect(85,14,30,27,'#eff8e9');rect(14,42,90,5,'#d4ead9');ctx.restore()}
+function cross(x,y,s,c){rect(x+s,y,s,s*3,c);rect(x,y+s,s*3,s,c)}
+function mountain(x,y,w,h,c){ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w*.18,y-h*.5);ctx.lineTo(x+w*.36,y-h*.5);ctx.lineTo(x+w*.36,y-h*.8);ctx.lineTo(x+w*.55,y-h);ctx.lineTo(x+w*.72,y-h*.72);ctx.lineTo(x+w,y);ctx.fill()}
+function bg(){rect(0,0,W,H,'#c9eadf');const grad=ctx.createLinearGradient(0,0,0,460);grad.addColorStop(0,'#bde4dc');grad.addColorStop(1,'#edf2ca');ctx.fillStyle=grad;ctx.fillRect(0,0,W,460);ctx.fillStyle='#faf3bd';ctx.beginPath();ctx.arc(766-camera*.025,112,40,0,Math.PI*2);ctx.fill();for(let i=0;i&lt;9;i++){let x=i*270-camera*.18;cloud(x,92+(i%3)*36,.55+(i%2)*.25)}for(let i=0;i&lt;12;i++)mountain(i*330-camera*.25-100,460,490,150+(i%3)*35,'#add6bd');for(let i=0;i&lt;18;i++)mountain(i*240-camera*.4-100,460,310,80+(i%3)*30,'#8fc6ab');for(let i=0;i&lt;24;i++){const x=i*210-camera*.58+90;rect(x,386,10,74,'#6b9f82');round(x-28,346,67,62,16,'#7fb397');round(x-12,326,41,59,10,'#8cbea1');rect(x+7,354,6,29,'#a1ccac')}}
+function block(s){let y=s.y-(s.bump?Math.sin(s.bump/.17*Math.PI)*8:0);const x=s.x;if(s.type==='ground'){rect(x,y,s.w,12,'#58815f');rect(x,y,s.w,5,'#bde989');rect(x,y+12,s.w,88,'#b99770');rect(x,y+12,s.w,8,'#937a5b');for(let tx=x;tx&lt;x+s.w;tx+=34){rect(tx+8,y+34,8,5,'#9a7b5c');rect(tx+23,y+66,7,5,'#d0b58d')}return}if(s.type==='step'){rect(x,y,s.w,s.h,'#87a794');rect(x,y,s.w,6,'#c2d5b2');rect(x,y+6,5,s.h-6,'#a9c3a5');rect(x+s.w-5,y+6,5,s.h-6,'#638b78');for(let ty=y+28;ty&lt;y+s.h;ty+=28)rect(x,ty,s.w,2,'#749b86');return}const color=s.used?'#a0b09a':s.type==='brick'?'#ce9d78':'#f4cc73';rect(x,y,44,44,'#5f795e');rect(x+3,y+3,38,37,color);rect(x+3,y+3,38,5,s.used?'#b2c2a9':'#ffebac');rect(x+5,y+39,34,3,'#926e4d');if(s.type==='brick'){rect(x+3,y+21,38,3,'#a57555');rect(x+20,y+7,3,14,'#a57555');rect(x+10,y+24,3,15,'#a57555')}else if(!s.used){cross(x+12,y+12,7,'#fff6cf');rect(x+5,y+8,3,3,'#bba05e');rect(x+36,y+33,3,3,'#bba05e')}else rect(x+18,y+18,8,8,'#879780')}
+function pill(x,y){ctx.save();ctx.translate(x+14,y+12);ctx.rotate(-.4);round(-15,-9,30,18,8,'#fff3de');ctx.save();ctx.beginPath();ctx.rect(-16,-10,16,20);ctx.clip();round(-15,-9,30,18,8,'#ee8798');ctx.restore();rect(-10,-5,7,3,'#ffc1c8');rect(1,-8,2,16,'#ccd1c0');ctx.restore()}
+function germ(e){const x=e.x+17,y=e.y+17+Math.sin(frame*6+e.x)*2,c=e.type==='pink'?'#bb79b5':'#89ab44',light=e.type==='pink'?'#db9cce':'#b4d769';ctx.save();ctx.translate(x,y);for(let i=0;i&lt;8;i++){const a=i*Math.PI/4;ctx.strokeStyle=c;ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(Math.cos(a)*11,Math.sin(a)*11);ctx.lineTo(Math.cos(a)*20,Math.sin(a)*20);ctx.stroke();rect(Math.cos(a)*20-3,Math.sin(a)*20-3,6,6,c)}round(-16,-15,32,30,10,c);round(-12,-12,25,22,7,light);rect(-9,-5,6,8,'#faf4d9');rect(3,-5,6,8,'#faf4d9');rect(-7,-2,3,4,'#294b3b');rect(4,-2,3,4,'#294b3b');rect(-5,8,11,3,'#476247');ctx.restore()}
+function pharmacist(){const p=player;if(p.inv&gt;0&amp;&amp;Math.floor(frame*14)%2===0)return;ctx.save();ctx.translate(Math.round(p.x+15),Math.round(p.y));if(p.shield){ctx.strokeStyle='#fafbbc';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(0,26,27,37,0,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#fffcc01a';ctx.fill()}ctx.scale(p.dir,1);const step=p.ground?Math.sin(p.walk)*3:2;rect(-9,43,7,8+step,'#315d65');rect(3,43,7,8-step,'#315d65');rect(-12,50+step,11,4,'#21424f');rect(3,50-step,12,4,'#21424f');rect(-13,23,26,24,'#f8f7dd');rect(-13,23,4,24,'#c9dbd0');rect(-4,24,8,20,'#59a99b');rect(-2,26,4,7,'#315d65');rect(-3,7,15,17,'#e7b183');rect(-10,9,9,13,'#e7b183');rect(-10,2,20,8,'#4b4c43');rect(-12,6,6,11,'#4b4c43');rect(0,11,7,5,'#234d4b');rect(9,11,6,5,'#234d4b');rect(6,12,4,2,'#234d4b');rect(2,12,3,2,'#d1f1df');rect(11,12,2,2,'#d1f1df');rect(6,20,5,2,'#9d604f');rect(-14,28,5,15,'#e4edde');rect(10,29,6,12,'#f8f7dd');rect(11,39,6,5,'#e7b183');rect(9,41,13,10,'#cc8c61');cross(12,42,2,'#f9f1d2');cross(4,30,2,'#4a9e81');ctx.restore()}
+function scenery(){// Original pharmacy, checkpoint, and trail signs.
+rect(3980,294,225,166,'#f5efd6');rect(3970,282,245,16,'#367e70');rect(3980,273,225,9,'#6ca590');round(4007,306,171,38,5,'#386b5c');text('PHARMACY',4092,332,21,'#f2f1cc','center');rect(4063,367,60,93,'#75b6a6');rect(4069,374,48,79,'#c0ded0');rect(4091,374,4,79,'#72a08f');rect(4105,417,5,5,'#38594c');rect(3997,365,47,50,'#9dcdc3');rect(4001,369,39,42,'#c5e6d7');cross(4009,377,8,'#4b9c80');rect(4140,365,47,50,'#9dcdc3');cross(4149,377,8,'#4b9c80');rect(3975,444,229,16,'#87a18c');rect(3966,455,248,5,'#456d57');rect(4077,226,30,48,'#f5efd6');cross(4076,229,11,'#4c977b');
+rect(2320,325,5,135,'#537761');ctx.fillStyle=checkpoint?'#f6d67f':'#f2f1d2';ctx.beginPath();ctx.moveTo(2325,328);ctx.lineTo(2384,328);ctx.lineTo(2370,352);ctx.lineTo(2325,352);ctx.fill();cross(2334,331,5,'#418a72');
+for(const [x,caption] of [[140,'GO →'],[980,'JUMP!'],[2080,'JUMP!'],[3120,'JUMP!'],[3830,'Rx →']]){rect(x+23,413,5,47,'#8d9974');round(x,387,61,31,4,'#f1dfac');text(caption,x+30,407,12,'#617453','center')}
+for(let i=0;i&lt;68;i++){const x=i*67+19;if(solids.some(s=&gt;s.type==='ground'&amp;&amp;x&gt;s.x&amp;&amp;x&lt;s.x+s.w)){rect(x,453,3,7,'#476c4b');rect(x-3,451,3,3,i%3?'#dbe6a0':'#f3cfa6')}}
+}
+function hud(){if(W&lt;960){round(12,12,W-24,68,10,'#173c32ed');text(String(score).padStart(5,'0'),28,42,23,'#fff1c8');text('คะแนน',28,64,15,'#a5c7ae','left','sans-serif');for(let i=0;i&lt;3;i++)text(i&lt;lives?'♥':'♡',160+i*27,45,26,i&lt;lives?'#f4a2a4':'#729184');text(player.shield?'✚ เกราะพร้อม':'✚ ไม่มีเกราะ',275,44,19,player.shield?'#dcf68e':'#93b4a0','left','sans-serif');text(Math.floor(time)+'s',W-28,39,21,'#fff1c8','right');text('ร้านยา →',W-28,65,16,'#e0e8c4','right','sans-serif');return}round(20,18,920,54,12,'#173c32ed');text('Rx',37,53,25,'#baecb5');text('SCORE',87,38,10,'#a5c7ae');text(String(score).padStart(5,'0'),87,58,19,'#fff1c8');text('LIFE',215,38,10,'#a5c7ae');for(let i=0;i&lt;3;i++)text(i&lt;lives?'♥':'♡',215+i*24,60,23,i&lt;lives?'#f4a2a4':'#729184');text(player.shield?'✚ เกราะพร้อม':'✚ ไม่มีเกราะ',331,52,14,player.shield?'#dcf68e':'#93b4a0','left','sans-serif');text('01—01',705,40,11,'#b4d2b8');text(Math.floor(time)+'s',705,58,15,'#fff1c8');text('ร้านยา →',910,39,12,'#e0e8c4','right','sans-serif');round(801,50,109,5,2,'#486b52');round(801,50,Math.max(4,109*Math.min(1,player.x/4110)),5,2,'#c9ee9b')}
+function draw(){ctx.clearRect(0,0,W,H);bg();ctx.save();ctx.translate(-Math.round(camera)+(shake?Math.random()*6-3:0),0);scenery();for(const s of solids)if(s.x+s.w&gt;camera-20&amp;&amp;s.x&lt;camera+W+20)block(s);for(const c of coins)if(!c.got){const y=c.y+Math.sin(frame*4+c.x)*4;round(c.x,y,21,25,7,'#b99b47');round(c.x+3,y+1,15,22,5,'#f9d67a');rect(c.x+9,y+5,3,13,'#fff3b0')}for(const m of meds)if(!m.got)pill(m.x,m.y);for(const e of enemies)if(!e.dead)germ(e);pharmacist();for(const p of particles)rect(p.x,p.y,4,4,p.c);for(const l of labels){ctx.globalAlpha=Math.min(1,l.t*2);text(l.txt,l.x,l.y,16,l.c,'left','sans-serif')}ctx.globalAlpha=1;ctx.restore();hud()}
+ui.action.onclick=play;ui.pause.onclick=pause;document.getElementById('restart').onclick=()=&gt;{reset();state='playing';ui.overlay.classList.add('hidden');ui.pause.textContent='พักเกม'};document.getElementById('sound').onclick=e=&gt;{muted=!muted;e.currentTarget.textContent='เสียง: '+(muted?'ปิด':'เปิด');e.currentTarget.setAttribute('aria-pressed',String(!muted));e.currentTarget.setAttribute('aria-label',muted?'เปิดเสียง':'ปิดเสียง');if(!muted)sound('coin')};
+function press(k){if(k==='jump'&amp;&amp;!keys.jump&amp;&amp;state==='playing')buffer=.15;keys[k]=true}
+const keymap={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',ArrowUp:'jump',KeyW:'jump'};
+function syncInput(){for(const key of ['left','right','jump']){const active=[...heldKeyboard].some(code=&gt;keymap[code]===key)||[...heldPointers.values()].includes(key);if(active&amp;&amp;!keys[key])press(key);else if(!active)keys[key]=false}document.querySelectorAll('[data-key]').forEach(b=&gt;{b.classList.toggle('held',[...heldPointers.values()].includes(b.dataset.key))})}
+window.addEventListener('keydown',e=&gt;{if(keymap[e.code]){if(e.target.tagName==='BUTTON'&amp;&amp;e.code==='Space'&amp;&amp;state!=='playing')return;e.preventDefault();heldKeyboard.add(e.code);syncInput()}if(e.code==='KeyP'&amp;&amp;!e.repeat)pause();if(e.code==='KeyR'&amp;&amp;!e.repeat)document.getElementById('restart').click()});
+window.addEventListener('keyup',e=&gt;{if(keymap[e.code]){heldKeyboard.delete(e.code);syncInput();e.preventDefault()}});
+document.querySelectorAll('[data-key]').forEach(b=&gt;{
+b.addEventListener('contextmenu',e=&gt;e.preventDefault());
+b.addEventListener('pointerdown',e=&gt;{if(state!=='playing'||(e.pointerType==='mouse'&amp;&amp;e.button!==0))return;e.preventDefault();b.setPointerCapture(e.pointerId);heldPointers.set(e.pointerId,b.dataset.key);syncInput()});
+b.addEventListener('pointermove',e=&gt;{if(!heldPointers.has(e.pointerId))return;const over=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-key]');if(over){heldPointers.set(e.pointerId,over.dataset.key);syncInput()}});
+for(const event of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(event,e=&gt;{heldPointers.delete(e.pointerId);syncInput()});
+});
+window.addEventListener('blur',()=&gt;{release();if(state==='playing')show('paused')});document.addEventListener('visibilitychange',()=&gt;{if(document.hidden){release();if(state==='playing')show('paused')}});
+function resizeGame(){const portrait=window.matchMedia('(max-width:650px) and (orientation:portrait)').matches;const next=portrait?640:960;if(next!==W){W=next;canvas.width=W;if(player)camera=Math.max(0,Math.min(END-W,player.x-W*.32));release()}document.documentElement.style.setProperty('--game-ratio',W+'/'+H)}
+window.addEventListener('resize',resizeGame);window.addEventListener('orientationchange',()=&gt;{release();if(state==='playing')show('paused')});
+const expand=document.getElementById('expand');function setExpanded(on){document.body.classList.toggle('immersive',on);expand.textContent=on?'ย่อจอ ↙':'ขยายจอ ⛶';expand.setAttribute('aria-pressed',String(on));resizeGame()}
+expand.onclick=async()=&gt;{const on=!document.body.classList.contains('immersive');setExpanded(on);try{if(on&amp;&amp;document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else if(!on&amp;&amp;document.fullscreenElement)await document.exitFullscreen()}catch(e){/* The in-page expanded layout also works without native fullscreen. */}};
+document.addEventListener('fullscreenchange',()=&gt;{setExpanded(Boolean(document.fullscreenElement))});
+window.addEventListener('keydown',e=&gt;{if(e.code==='Escape'&amp;&amp;!document.fullscreenElement)setExpanded(false)});
+resizeGame();
+// Fixed simulation steps keep jumps and collision consistent across refresh rates.
+let last=performance.now(),acc=0;function loop(now){let delta=Math.min((now-last)/1000,.05);last=now;acc+=delta;while(acc&gt;=1/120){update(1/120);acc-=1/120}draw();requestAnimationFrame(loop)}reset();requestAnimationFrame(loop);
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;" title="Pharma Quest Game"></iframe>
+</div>
+<div class="prototype-takeaway"><b>Key idea:</b> Generative AI ไม่ได้แค่ “เขียน” แต่ช่วย “สร้างต้นแบบ” ได้ — จากเอกสารและภาพ ไปจนถึง interactive experience</div>
+</section>
+</main>
+<footer class="footer">
+<div class="footer-inner"><div><strong>AI for Medical Communication Leaders · Workshop Lab</strong><br/><small>ออกแบบและเรียบเรียงกิจกรรมโดย ดร.ภก.วิรุณ เวชศิริ</small></div><div style="text-align:right">Effective AI Use = Good Model × Good Prompt × Good Context × Good Tools × Human in the Loop<br/><small>Privacy First · Verify Source · Human Accountability</small></div></div>
+</footer>
+<script>
+
+const sampleStore={};
+document.querySelectorAll('.editor').forEach(el=>{sampleStore[el.id]=el.value;});
+function getText(id){const el=document.getElementById(id);return el && 'value' in el ? el.value : (el?el.innerText:'');}
+async function copyText(txt){
+  try{if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(txt);return true;}}
+  catch(e){}
+  try{const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();const ok=document.execCommand('copy');document.body.removeChild(ta);return ok;}catch(e){return false;}
+}
+function flash(btn,msg){const old=btn.innerText;btn.innerText=msg;setTimeout(()=>btn.innerText=old,1400);}
+document.querySelectorAll('.copy-btn').forEach(btn=>btn.addEventListener('click',async()=>{const ok=await copyText(getText(btn.dataset.copy));if(ok)flash(btn,'คัดลอกแล้ว ✓');else alert('คัดลอกไม่สำเร็จ กรุณาเลือกข้อความแล้ว Copy');}));
+document.querySelectorAll('.combo-btn').forEach(btn=>btn.addEventListener('click',async()=>{const [p,c]=btn.dataset.copyboth.split('|');const txt=getText(p)+'\n\n---\n\nCONTEXT:\n'+getText(c);const ok=await copyText(txt);if(ok)flash(btn,'คัดลอกครบแล้ว ✓');else alert('คัดลอกไม่สำเร็จ กรุณา Copy แยกกัน');}));
+document.querySelectorAll('.reset-btn').forEach(btn=>btn.addEventListener('click',()=>{const n=btn.dataset.reset;['context-'+n,'prompt-'+n].forEach(id=>{const el=document.getElementById(id);if(el&&sampleStore[id]!==undefined)el.value=sampleStore[id];});flash(btn,'คืนค่าแล้ว ✓');}));
+const files={
+ sales:{name:'pharmacy_sales_demo.csv',data:`Category,Jul Sales,Aug Sales,Gross Margin %\nPain/Fever,82000,76000,31\nCold/Allergy,96000,124000,29\nGI,74000,71000,33\nVitamins,142000,128000,38\nDermocosmetic,118000,156000,42\nTravel Health,58000,93000,35\nChronic Refill,168000,176000,24\n`},
+ stock:{name:'pharmacy_stock_demo.csv',data:`SKU Group,Avg units/day,Stock on hand,Lead time days,Expiry risk\nCold remedy,8,96,5,Low\nTravel sickness,7,49,4,Low\nSunscreen,4,180,10,Medium\nVitamin C,2,180,7,Medium\nGI relief,5,60,5,Low\nWound care,3,75,6,Low\nPremium supplement,1,90,14,High\n`}
+};
+document.querySelectorAll('.download-btn').forEach(btn=>btn.addEventListener('click',()=>{const f=files[btn.dataset.file];if(!f)return;const blob=new Blob(['\ufeff'+f.data],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=f.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);flash(btn,'ดาวน์โหลดแล้ว ✓');}));
+
+const identityDefaults={};
+['id-role','id-gender','id-age','id-ethnicity','id-skin','id-body','id-face','id-eyes','id-hair','id-outfit','id-accessories','id-personality','id-pose','id-setting','id-lighting','id-style','id-ratio','id-colors','id-extra'].forEach(id=>{const el=document.getElementById(id);if(el)identityDefaults[id]=el.value;});
+function val(id){const e=document.getElementById(id);return e?e.value:'';}
+function buildIdentityPrompt(){
+ const prompt=`Role: ${val('id-role')}
+Gender/Age/Ethnicity: ${val('id-gender')}, ${val('id-age')}, ${val('id-ethnicity')}
+Body/Skin: ${val('id-body')}, ${val('id-skin')}
+Face: ${val('id-face')}
+Eyes: ${val('id-eyes')}
+Hair/Headwear: ${val('id-hair')}
+Outfit: ${val('id-outfit')}
+Accessories: ${val('id-accessories')}
+Personality: ${val('id-personality')}
+Pose: ${val('id-pose')}
+Features / Setting: ${val('id-setting')}
+Lighting: ${val('id-lighting')}
+Brand colors: ${val('id-colors')}
+Identity rule: ${val('id-extra')}
+Visual style: ${val('id-style')}
+Composition / Use: ${val('id-ratio')}
+
+Visual safety:
+- fictional/professional healthcare executive character, not a real person unless an authorized reference image is supplied
+- no patient-identifiable information
+- no unsupported medical claims, fake documents, or misleading clinical data on screen
+- preserve the same face, hair/headwear, outfit, key accessories, palette and personality in future images
+- future variations may change only pose, scene, prop and campaign message unless explicitly instructed otherwise`;
+ const out=document.getElementById('identity-prompt');if(out)out.value=prompt;return prompt;
+}
+document.getElementById('build-identity')?.addEventListener('click',()=>{buildIdentityPrompt();flash(document.getElementById('build-identity'),'สร้างแล้ว ✓');});
+document.getElementById('copy-identity')?.addEventListener('click',async()=>{const ok=await copyText(buildIdentityPrompt());if(ok)flash(document.getElementById('copy-identity'),'คัดลอกแล้ว ✓');});
+document.getElementById('reset-identity')?.addEventListener('click',()=>{Object.entries(identityDefaults).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.value=v;});buildIdentityPrompt();flash(document.getElementById('reset-identity'),'คืนค่าแล้ว ✓');});
+['id-role','id-gender','id-age','id-ethnicity','id-skin','id-body','id-face','id-eyes','id-hair','id-outfit','id-accessories','id-personality','id-pose','id-setting','id-lighting','id-style','id-ratio','id-colors','id-extra'].forEach(id=>document.getElementById(id)?.addEventListener('change',buildIdentityPrompt));
+buildIdentityPrompt();
+
+
+
+(function(){
+  const tabs=[...document.querySelectorAll('.page-tab')];
+  const pages=[...document.querySelectorAll('.app-page')];
+  function showPage(id){
+    pages.forEach(p=>p.classList.toggle('active',p.id===id));
+    tabs.forEach(t=>t.classList.toggle('active',t.dataset.page===id));
+    history.replaceState(null,'','#'+id.replace('page-',''));
+    window.scrollTo({top:document.querySelector('.page-tabs').offsetTop,behavior:'smooth'});
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>showPage(t.dataset.page)));
+  const hash=location.hash.replace('#','');
+  const map={business:'page-business',content:'page-content',game:'page-game'};
+  if(map[hash]) showPage(map[hash]);
+})();
+</script>
+</body>
+</html>
